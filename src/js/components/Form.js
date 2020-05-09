@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = () => {
+const Form = ({onSubmit=f=>f}) => {
   const submit = e => {
     e.preventDefault();
 
@@ -10,6 +10,7 @@ const Form = () => {
     server = server.options[server.selectedIndex].value;
     
     console.log(`${summoner} ${server} should generate url`);
+    onSubmit({summoner: summoner, server: server});
   }
 
   return (
