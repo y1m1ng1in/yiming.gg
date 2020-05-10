@@ -1,14 +1,10 @@
 import React from "react";
-import Form from "./components/Form";
+import { SummonerSearch } from "./components/container"
 
 const App = () => {
-  let x = msg => {
-    console.log(msg);
-  }
-
   return (
     <div>
-    <Form onSubmit={x}></Form>
+    <SummonerSearch></SummonerSearch>
     <div>
       data goes here...
     </div>
