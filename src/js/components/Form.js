@@ -2,19 +2,16 @@ import React from "react";
 
 const Form = ({onSubmit=f=>f}) => {
   const submit = e => {
-    e.preventDefault();
-
     let summoner = document.getElementById("player-name").value;
     let server   = document.getElementById("server");
     
     server = server.options[server.selectedIndex].value;
-    
-    console.log(`${summoner} ${server} should generate url`);
     onSubmit({summoner: summoner, server: server});
+    console.log(`${summoner}  ${server}`);
   }
 
   return (
-    <form onSubmit={submit}>
+    <form method="post" action="/search" onSubmit={submit}>
       <label htmlFor="player-name">Player name</label>
       <fieldset>
         <legend>Server</legend>
