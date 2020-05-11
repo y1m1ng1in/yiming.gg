@@ -11,6 +11,9 @@ let https   = require('https');
 let rp      = require('request-promise');
 let apiKey  = require('../config.json')["api-key"];
 
+const maximumRequestForMatches 
+  = require('../config.json')["match-data-maximum-request"];
+
 const fileAssets = express.static(path.join(__dirname, '../../dist'));
 
 const store = storeFactory();
@@ -69,7 +72,22 @@ app.post('/search', function (req, res) {
         ...state,
         ...value
       }
-      res.send(state);
+      if(value.matches.length > 0) {
+        state.startIndex = 0;
+        state.endIndex 
+          = value.matches.length > maximumRequestForMatches 
+          ? maximumRequestForMatches 
+          : value.matches.length - 1;
+      }
+      return Promise.all([
+        ...value.matches
+            .slice(state.startIndex, state.endIndex)
+            .map(m => matchData(m.gameId, server, apiKey))
+            .map(url => rp(url, {json: true}))
+      ]);
+    })
+    .then(values => {
+      res.send(values);
     })
     .catch(err => {
       console.log(err);

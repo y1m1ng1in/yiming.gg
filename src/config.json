@@ -1,3 +1,4 @@
 {
-  "api-key": "replace-me"
+  "api-key": "replace-me",
+  "match-data-maximum-request": 10
 }
