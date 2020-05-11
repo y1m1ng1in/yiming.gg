@@ -41,6 +41,46 @@ const html = renderToString(
   </Provider>
 );
 
+const transformMatchStat = (match, summonerName) => {
+  let result = {};
+
+  let getResult = team => {
+    if(team.win === "Win" ) {
+      result.win = {};
+      result.win.teamId = team.teamId;
+      result.win.teamStat = team;
+    } else if(team.win === "Fail") {
+      result.lose = {};
+      result.lose.teamId = team.teamId;
+      result.lose.teamStat = team;
+    } else {
+      result.unknown = {};
+      result.unknown.teamId = team.teamId;
+      result.unknown.teamStat = team;
+    }
+  }
+
+  let getParticipants = (participants, participantIdentities) => {
+    participantIdentities.forEach(p => {
+      result[p.participantId] = {}
+      result[p.participantId].info = p.player;
+      if(p.player.summonerName === summonerName) {
+        result.summonerParticipantId = p.participantId;
+      }
+    });
+
+    participants.forEach(p => {
+      result[p.participantId].stat = p;
+    });
+  }
+
+  getResult(match.teams[0]);
+  getResult(match.teams[1]);
+  getParticipants(match.participants, match.participantIdentities);
+
+  return result;
+}
+
 const app = express()
   .use(fileAssets)
   .use(express.urlencoded()); 
@@ -87,7 +127,8 @@ app.post('/search', function (req, res) {
       ]);
     })
     .then(values => {
-      res.send(values);
+      state.matchStats = values.map(m => transformMatchStat(m, summonerName));
+      res.send(state);
     })
     .catch(err => {
       console.log(err);
