@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import { url } from "./reducers";
 
-const storeFactory = () => createStore(url);
+const storeFactory = (initialState={}) => createStore(url, initialState);
 
 export default storeFactory;

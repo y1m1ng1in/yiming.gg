@@ -16,9 +16,9 @@ const maximumRequestForMatches
 
 const fileAssets = express.static(path.join(__dirname, '../../dist'));
 
-const store = storeFactory();
+const emptyStore = storeFactory();
 
-const basePage = html => `
+const basePage = (html, store=emptyStore) => `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -29,36 +29,21 @@ const basePage = html => `
   <div id="app">${html}</div>
   <script>
     window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};
+    console.log(${JSON.stringify(store.getState())});
   </script>
-  <script type="text/javascript" src="dist/bundle.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
   </body>
   </html>
 `
   
-const html = renderToString(  
-  <Provider store={store}>
+const html = (initStore=emptyStore) => renderToString(  
+  <Provider store={initStore}>
     <App />
   </Provider>
 );
 
 const transformMatchStat = (match, summonerName) => {
   let result = {};
-
-  let getResult = team => {
-    if(team.win === "Win" ) {
-      result.win = {};
-      result.win.teamId = team.teamId;
-      result.win.teamStat = team;
-    } else if(team.win === "Fail") {
-      result.lose = {};
-      result.lose.teamId = team.teamId;
-      result.lose.teamStat = team;
-    } else {
-      result.unknown = {};
-      result.unknown.teamId = team.teamId;
-      result.unknown.teamStat = team;
-    }
-  }
 
   let getParticipants = (participants, participantIdentities) => {
     participantIdentities.forEach(p => {
@@ -74,8 +59,6 @@ const transformMatchStat = (match, summonerName) => {
     });
   }
 
-  getResult(match.teams[0]);
-  getResult(match.teams[1]);
   getParticipants(match.participants, match.participantIdentities);
 
   return result;
@@ -86,7 +69,7 @@ const app = express()
   .use(express.urlencoded()); 
 
 app.get('/', function(req, res) {
-  res.status(200).send(basePage(html));
+  res.status(200).send(basePage(html()));
 });
 
 app.post('/search', function (req, res) {
@@ -94,6 +77,7 @@ app.post('/search', function (req, res) {
   let server       = req.body['server'];
   let state        = {};
   let url          = base(summonerName, server, apiKey);
+  let initStore    = {};
 
   rp(url, {json: true})
     .then(value => {
@@ -102,6 +86,7 @@ app.post('/search', function (req, res) {
         ...value,
         server: server
       }
+      initStore = {...value};
       return rp(
         matchList(state.accountId, state.server, apiKey), 
         {json: true}
@@ -128,7 +113,49 @@ app.post('/search', function (req, res) {
     })
     .then(values => {
       state.matchStats = values.map(m => transformMatchStat(m, summonerName));
-      res.send(state);
+      initStore = {
+        ...initStore,
+        matchStats: state.matchStats.map(m => {
+          let generalKeys = [
+            'participantId', 
+            'teamId', 
+            'championId', 
+            'spell1Id', 
+            'spell2Id'
+          ];
+          let summonerStat = {};
+          let otherPlayerStat = {};
+          
+          generalKeys.forEach(k => summonerStat[k] = m[m.summonerParticipantId]["stat"][k]);
+          summonerStat = {
+            ...summonerStat,
+            ...m[m.summonerParticipantId]["stat"]["stats"]
+          }
+          Object
+            .keys(m)
+            .filter(id => 
+              id != m.summonerParticipantId &&
+              id != 'lose' &&
+              id != 'win' &&
+              id != 'summonerParticipantId'
+            )
+            .forEach(id => {
+              otherPlayerStat[id] = {};
+              generalKeys.forEach(k => otherPlayerStat[id][k] = m[id]["stat"][k]);
+              otherPlayerStat[id] = {
+                ...otherPlayerStat[id],
+                ...m[id]["stat"]["stats"],
+                ...m[id]["info"],
+              }
+            });
+          return {
+            summonerStat: summonerStat,
+            otherPlayerStat: otherPlayerStat
+          }
+        }),
+      };
+      initStore = storeFactory(initStore);
+      res.send(basePage(html(initStore)));
     })
     .catch(err => {
       console.log(err);
