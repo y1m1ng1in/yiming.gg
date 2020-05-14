@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  SummonerGeneralInfo, MatchListItem 
+  SummonerGeneralInfo, MatchListContainer
 } from "./container"
 
 const Summoner = ({ hasSearchedSummoner }) => 
@@ -8,8 +8,8 @@ const Summoner = ({ hasSearchedSummoner }) =>
     {
       hasSearchedSummoner 
       ? <div>
-          <SummonerGeneralInfo></SummonerGeneralInfo>
-          <MatchListItem index={0}></MatchListItem>
+          <SummonerGeneralInfo />
+          <MatchListContainer />
         </div> 
       : ""
     }

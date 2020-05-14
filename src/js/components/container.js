@@ -3,6 +3,7 @@ import Form from "../components/Form";
 import SummonerGeneral from "../components/SummonerGeneral";
 import MatchOverview from "../components/MatchOverview";
 import Summoner from "../components/Summoner";
+import MatchList from "../components/MatchList";
 import { getSummonerInfo } from "../../actions";
 
 export const SummonerSearch = connect(
@@ -26,13 +27,9 @@ export const SummonerGeneralInfo = connect(
 
 export const MatchListItem = connect(
   (state, ownProps) => {
-    const { startIndex, endIndex } = state;
+    const { startIndex } = state;
     const { index } = ownProps;
     const matchListIndex = startIndex + index;
-    // assert(
-    //   matchListIndex >= startIndex && 
-    //   matchListIndex < endIndex
-    // );
     const { champion, timestamp, queue } = state.matchList[matchListIndex];
     const { kills, deaths, assists } = state.matchStats[index].summonerStat;
     return {
@@ -43,6 +40,11 @@ export const MatchListItem = connect(
   },
   null
 )(MatchOverview)
+
+export const MatchListContainer = connect(
+  state => ({ indexRange: state.endIndex - state.startIndex }),
+  null  // should implement reducer and action to select which match detail displayed
+)(MatchList)
 
 export const SummonerData = connect(
   state => ({ hasSearchedSummoner: state.hasSearchedSummoner }),

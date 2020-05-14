@@ -6,11 +6,8 @@ import {
 const App = () => {
   return (
     <div>
-      <SummonerSearch></SummonerSearch>
-      <SummonerData></SummonerData>
-      <div>
-        data goes here...
-      </div>
+      <SummonerSearch />
+      <SummonerData />
     </div>
   );
 };
