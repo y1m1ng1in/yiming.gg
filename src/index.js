@@ -4,9 +4,12 @@ import { Provider } from 'react-redux';
 import App from "./js/App";
 import storeFactory from "./js/store/";
 
-const store = storeFactory();
+const store = storeFactory(window.__INITIAL_STATE__);
+
+window.React = React;
+window.store = store;
+
 console.log(store.getState());
-console.log(window.__INITINAL_STATE__);
 
 const wrapper = document.getElementById("app");
 hydrate(

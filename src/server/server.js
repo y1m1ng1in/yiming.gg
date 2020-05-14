@@ -18,7 +18,7 @@ const fileAssets = express.static(path.join(__dirname, '../../dist'));
 
 const emptyStore = storeFactory();
 
-const basePage = (html, store=emptyStore) => `
+const basePage = (html, state={}) => `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -28,8 +28,7 @@ const basePage = (html, store=emptyStore) => `
   <body>
   <div id="app">${html}</div>
   <script>
-    window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};
-    console.log(${JSON.stringify(store.getState())});
+    window.__INITIAL_STATE__ = ${JSON.stringify(state)};
   </script>
   <script type="text/javascript" src="bundle.js"></script>
   </body>
@@ -155,12 +154,14 @@ app.post('/search', function (req, res) {
         }),
       };
       initStore = storeFactory(initStore);
-      res.send(basePage(html(initStore)));
+      res.send(basePage(html(initStore), initStore.getState()));
     })
     .catch(err => {
       console.log(err);
     });
 });
+
+global.React = React;
 
 app.listen(
   3000, 

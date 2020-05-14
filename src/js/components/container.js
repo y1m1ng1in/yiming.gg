@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Form from "../components/Form";
+import SummonerGeneral from "../components/SummonerGeneral";
 import { getSummonerInfo } from "../../actions";
 
 export const SummonerSearch = connect(
@@ -11,3 +12,12 @@ export const SummonerSearch = connect(
     }
   })
 )(Form)
+
+export const SummonerGeneralInfo = connect(
+  state => ({
+    name: state.name,
+    level: state.summonerLevel,
+    icon: state.profileIconId 
+  }),
+  null
+)(SummonerGeneral)

@@ -1,13 +1,14 @@
 import React from "react";
-import { SummonerSearch } from "./components/container"
+import { SummonerSearch, SummonerGeneralInfo } from "./components/container"
 
 const App = () => {
   return (
     <div>
-    <SummonerSearch></SummonerSearch>
-    <div>
-      data goes here...
-    </div>
+      <SummonerSearch></SummonerSearch>
+      <SummonerGeneralInfo></SummonerGeneralInfo>
+      <div>
+        data goes here...
+      </div>
   </div>
   );
 };
