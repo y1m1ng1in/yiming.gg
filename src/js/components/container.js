@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Form from "../components/Form";
 import SummonerGeneral from "../components/SummonerGeneral";
+import MatchOverview from "../components/MatchOverview";
+import Summoner from "../components/Summoner";
 import { getSummonerInfo } from "../../actions";
 
 export const SummonerSearch = connect(
@@ -21,3 +23,28 @@ export const SummonerGeneralInfo = connect(
   }),
   null
 )(SummonerGeneral)
+
+export const MatchListItem = connect(
+  (state, ownProps) => {
+    const { startIndex, endIndex } = state;
+    const { index } = ownProps;
+    const matchListIndex = startIndex + index;
+    // assert(
+    //   matchListIndex >= startIndex && 
+    //   matchListIndex < endIndex
+    // );
+    const { champion, timestamp, queue } = state.matchList[matchListIndex];
+    const { kills, deaths, assists } = state.matchStats[index].summonerStat;
+    return {
+      champion: champion,
+      matchInfo: { timestamp: timestamp, queue: queue },
+      kda: { kills: kills, deaths: deaths, assists: assists }
+    };
+  },
+  null
+)(MatchOverview)
+
+export const SummonerData = connect(
+  state => ({ hasSearchedSummoner: state.hasSearchedSummoner }),
+  null
+)(Summoner)

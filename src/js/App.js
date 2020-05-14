@@ -1,15 +1,17 @@
 import React from "react";
-import { SummonerSearch, SummonerGeneralInfo } from "./components/container"
+import {
+  SummonerSearch, SummonerData 
+} from "./components/container"
 
 const App = () => {
   return (
     <div>
       <SummonerSearch></SummonerSearch>
-      <SummonerGeneralInfo></SummonerGeneralInfo>
+      <SummonerData></SummonerData>
       <div>
         data goes here...
       </div>
-  </div>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ const maximumRequestForMatches
 
 const fileAssets = express.static(path.join(__dirname, '../../dist'));
 
-const emptyStore = storeFactory();
+const emptyStore = storeFactory({ hasSearchedSummoner: false });
 
 const basePage = (html, state={}) => `
   <!DOCTYPE html>
@@ -77,15 +77,14 @@ app.post('/search', function (req, res) {
   let state        = {};
   let url          = base(summonerName, server, apiKey);
   let initStore    = {};
+  let startIndex   = 0;
+  let endIndex     = 0;
 
   rp(url, {json: true})
     .then(value => {
       console.log(value);
-      state = {
-        ...value,
-        server: server
-      }
-      initStore = {...value};
+      state = { ...value, server: server }
+      initStore = { hasSearchedSummoner: true, ...value };
       return rp(
         matchList(state.accountId, state.server, apiKey), 
         {json: true}
@@ -97,12 +96,18 @@ app.post('/search', function (req, res) {
         ...value
       }
       if(value.matches.length > 0) {
-        state.startIndex = 0;
-        state.endIndex 
+        endIndex 
           = value.matches.length > maximumRequestForMatches 
           ? maximumRequestForMatches 
           : value.matches.length - 1;
       }
+      state = { ...state, startIndex, endIndex };
+      initStore = { 
+        ...initStore, 
+        startIndex, 
+        endIndex, 
+        matchList: value.matches 
+      };
       return Promise.all([
         ...value.matches
             .slice(state.startIndex, state.endIndex)
@@ -154,6 +159,7 @@ app.post('/search', function (req, res) {
         }),
       };
       initStore = storeFactory(initStore);
+      // res.send(initStore.getState());
       res.send(basePage(html(initStore), initStore.getState()));
     })
     .catch(err => {
