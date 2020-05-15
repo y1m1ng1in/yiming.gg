@@ -16,7 +16,10 @@ const maximumRequestForMatches
 
 const fileAssets = express.static(path.join(__dirname, '../../dist'));
 
-const emptyStore = storeFactory({ hasSearchedSummoner: false });
+const emptyStore = storeFactory({ 
+  hasSearchedSummoner: false,
+  indexOfMatchListSelected: 0
+});
 
 const basePage = (html, state={}) => `
   <!DOCTYPE html>
@@ -157,6 +160,7 @@ app.post('/search', function (req, res) {
             otherPlayerStat: otherPlayerStat
           }
         }),
+        indexOfMatchListSelected: 0
       };
       initStore = storeFactory(initStore);
       // res.send(initStore.getState());

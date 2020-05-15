@@ -4,7 +4,7 @@ import SummonerGeneral from "../components/SummonerGeneral";
 import MatchOverview from "../components/MatchOverview";
 import Summoner from "../components/Summoner";
 import MatchList from "../components/MatchList";
-import { getSummonerInfo } from "../../actions";
+import { getSummonerInfo, getMatchDetail } from "../../actions";
 
 export const SummonerSearch = connect(
   null, 
@@ -35,10 +35,16 @@ export const MatchListItem = connect(
     return {
       champion: champion,
       matchInfo: { timestamp: timestamp, queue: queue },
-      kda: { kills: kills, deaths: deaths, assists: assists }
+      kda: { kills: kills, deaths: deaths, assists: assists },
+      index: index
     };
   },
-  null
+  dispatch => ({
+    onClick(indexOfMatchList) {
+      console.log(indexOfMatchList, "match selected in container.js");
+      dispatch(getMatchDetail(indexOfMatchList));
+    }
+  })
 )(MatchOverview)
 
 export const MatchListContainer = connect(
