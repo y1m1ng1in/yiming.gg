@@ -1,7 +1,7 @@
 import React from "react";
 
-const MatchOverview = ({ champion, kda, matchInfo, index }, onSelect=f=>f) => {
-  const select = _ => {
+const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
+  const select = () => {
     console.log("selected", index);
     onSelect(index);
   }

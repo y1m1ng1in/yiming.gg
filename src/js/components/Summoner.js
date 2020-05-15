@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  SummonerGeneralInfo, MatchListContainer
+  SummonerGeneralInfo, MatchListContainer, MatchDetailContainer
 } from "./container"
 
 const Summoner = ({ hasSearchedSummoner }) => 
@@ -10,6 +10,7 @@ const Summoner = ({ hasSearchedSummoner }) =>
       ? <div>
           <SummonerGeneralInfo />
           <MatchListContainer />
+          <MatchDetailContainer />
         </div> 
       : ""
     }

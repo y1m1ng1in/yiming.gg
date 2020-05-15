@@ -4,6 +4,7 @@ import SummonerGeneral from "../components/SummonerGeneral";
 import MatchOverview from "../components/MatchOverview";
 import Summoner from "../components/Summoner";
 import MatchList from "../components/MatchList";
+import MatchDetail from "../components/MatchDetail";
 import { getSummonerInfo, getMatchDetail } from "../../actions";
 
 export const SummonerSearch = connect(
@@ -40,7 +41,7 @@ export const MatchListItem = connect(
     };
   },
   dispatch => ({
-    onClick(indexOfMatchList) {
+    onSelect(indexOfMatchList) {
       console.log(indexOfMatchList, "match selected in container.js");
       dispatch(getMatchDetail(indexOfMatchList));
     }
@@ -56,3 +57,10 @@ export const SummonerData = connect(
   state => ({ hasSearchedSummoner: state.hasSearchedSummoner }),
   null
 )(Summoner)
+
+export const MatchDetailContainer = connect(
+  state => {
+    return { matchData: state.matchStats[state.indexOfMatchListSelected] };
+  },
+  null
+)(MatchDetail)
