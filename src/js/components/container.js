@@ -5,7 +5,9 @@ import MatchOverview from "../components/MatchOverview";
 import Summoner from "../components/Summoner";
 import MatchList from "../components/MatchList";
 import MatchDetail from "../components/MatchDetail";
-import { getSummonerInfo, getMatchDetail } from "../../actions";
+import { 
+  getSummonerInfo, getMatchDetail, getMoreMatchStats 
+} from "../../actions";
 
 export const SummonerSearch = connect(
   null, 
@@ -49,8 +51,19 @@ export const MatchListItem = connect(
 )(MatchOverview)
 
 export const MatchListContainer = connect(
-  state => ({ indexRange: state.endIndex - state.startIndex }),
-  null  // should implement reducer and action to select which match detail displayed
+  state => ({ 
+    indexRange: state.endIndex,
+    matchMetas: {
+      summonerName: state.name,
+      server: state.server,
+      matchList: state.matchList
+    }
+  }),
+  dispatch => ({
+    onShowMore(matchStats) {
+      dispatch(getMoreMatchStats(matchStats));
+    }
+  })
 )(MatchList)
 
 export const SummonerData = connect(

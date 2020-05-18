@@ -9,7 +9,7 @@ export const indexOfMatchListSelected = (state=0, action) => {
 
 let constantKeys = [ 
   "id", "accountId", "puuid", "name", "profileIconId", 
-  "revisionDate", "summonerLevel"
+  "revisionDate", "summonerLevel", "server"
 ];
 
 export let constantKeyReducers = {};
@@ -24,7 +24,11 @@ export const startIndex = (state=0, action) => {
 }
 
 export const endIndex = (state=0, action) => {
-  return state;
+  if(action.type === "get_more_match_stats") {
+    return state + action.matchStats.length;
+  } else {
+    return state;
+  }
 }
 
 export const matchList = (state=[], action) => {
@@ -32,6 +36,10 @@ export const matchList = (state=[], action) => {
 }
 
 export const matchStats = (state=[], action) => {
-  return state;
+  if(action.type === "get_more_match_stats") {
+    return [ ...state, ...action.matchStats ];
+  } else {
+    return state;
+  }
 }
  

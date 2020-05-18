@@ -9,3 +9,8 @@ export const getMatchDetail = index => ({
   indexOfMatchListSelected: index,
   type: "get_match_detail"
 });
+
+export const getMoreMatchStats= matches => ({
+  matchStats: matches,
+  type: "get_more_match_stats"
+});

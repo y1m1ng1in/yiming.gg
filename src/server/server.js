@@ -5,11 +5,12 @@ import App from '../js/App';
 import storeFactory from "../js/store/";
 import { base, matchList, matchData } from "./api";
 
-let express = require('express');
-let path    = require('path');
-let https   = require('https');
-let rp      = require('request-promise');
-let apiKey  = require('../config.json')["api-key"];
+let express    = require('express');
+let path       = require('path');
+let https      = require('https');
+let bodyParser = require('body-parser');
+let rp         = require('request-promise');
+let apiKey     = require('../config.json')["api-key"];
 
 const maximumRequestForMatches 
   = require('../config.json')["match-data-maximum-request"];
@@ -66,15 +67,59 @@ const transformMatchStat = (match, summonerName) => {
   return result;
 }
 
+const createMatchStats = (originalMatchStats, summonerName) => {
+  return originalMatchStats
+    .map(m => transformMatchStat(m, summonerName))
+    .map(m => {
+      let generalKeys = [
+        'participantId', 
+        'teamId', 
+        'championId', 
+        'spell1Id', 
+        'spell2Id'
+      ];
+      let summonerStat = {};
+      let otherPlayerStat = {};
+      
+      generalKeys.forEach(k => summonerStat[k] = m[m.summonerParticipantId]["stat"][k]);
+      summonerStat = {
+        ...summonerStat,
+        ...m[m.summonerParticipantId]["stat"]["stats"]
+      }
+      Object
+        .keys(m)
+        .filter(id => 
+          id != m.summonerParticipantId &&
+          id != 'lose' &&
+          id != 'win' &&
+          id != 'summonerParticipantId'
+        )
+        .forEach(id => {
+          otherPlayerStat[id] = {};
+          generalKeys.forEach(k => otherPlayerStat[id][k] = m[id]["stat"][k]);
+          otherPlayerStat[id] = {
+            ...otherPlayerStat[id],
+            ...m[id]["stat"]["stats"],
+            ...m[id]["info"],
+          }
+        });
+      return {
+        summonerStat: summonerStat,
+        otherPlayerStat: otherPlayerStat
+      }
+    })
+}
+
 const app = express()
   .use(fileAssets)
-  .use(express.urlencoded()); 
+  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.json()); 
 
 app.get('/', function(req, res) {
   res.status(200).send(basePage(html()));
 });
 
-app.post('/search', function (req, res) {
+app.post('/search', function(req, res) {
   let summonerName = req.body['player-name'];
   let server       = req.body['server'];
   let state        = {};
@@ -87,7 +132,7 @@ app.post('/search', function (req, res) {
     .then(value => {
       console.log(value);
       state = { ...value, server: server }
-      initStore = { hasSearchedSummoner: true, ...value };
+      initStore = { hasSearchedSummoner: true, ...value, server: server };
       return rp(
         matchList(state.accountId, state.server, apiKey), 
         {json: true}
@@ -119,52 +164,42 @@ app.post('/search', function (req, res) {
       ]);
     })
     .then(values => {
-      state.matchStats = values.map(m => transformMatchStat(m, summonerName));
       initStore = {
         ...initStore,
-        matchStats: state.matchStats.map(m => {
-          let generalKeys = [
-            'participantId', 
-            'teamId', 
-            'championId', 
-            'spell1Id', 
-            'spell2Id'
-          ];
-          let summonerStat = {};
-          let otherPlayerStat = {};
-          
-          generalKeys.forEach(k => summonerStat[k] = m[m.summonerParticipantId]["stat"][k]);
-          summonerStat = {
-            ...summonerStat,
-            ...m[m.summonerParticipantId]["stat"]["stats"]
-          }
-          Object
-            .keys(m)
-            .filter(id => 
-              id != m.summonerParticipantId &&
-              id != 'lose' &&
-              id != 'win' &&
-              id != 'summonerParticipantId'
-            )
-            .forEach(id => {
-              otherPlayerStat[id] = {};
-              generalKeys.forEach(k => otherPlayerStat[id][k] = m[id]["stat"][k]);
-              otherPlayerStat[id] = {
-                ...otherPlayerStat[id],
-                ...m[id]["stat"]["stats"],
-                ...m[id]["info"],
-              }
-            });
-          return {
-            summonerStat: summonerStat,
-            otherPlayerStat: otherPlayerStat
-          }
-        }),
+        matchStats: createMatchStats(values, summonerName),
         indexOfMatchListSelected: 0
       };
       initStore = storeFactory(initStore);
       // res.send(initStore.getState());
       res.send(basePage(html(initStore), initStore.getState()));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.post('/more', function(req, res) {
+  let gameIds      = req.body.gameIds;
+  let summonerName = req.body.summonerName;
+  let server       = req.body.server;
+  let indexStart   = req.body.expectedNextIndexStart;
+
+  let indexEnd = 
+    indexStart + maximumRequestForMatches >= gameIds.length 
+    ? gameIds.length - 1
+    : indexStart + maximumRequestForMatches;
+
+  Promise
+    .all([
+      ...gameIds
+        .slice(indexStart, indexEnd)
+        .map(id => rp(matchData(id, server, apiKey), {json: true}))
+    ])
+    .then(values => {
+      let data = {
+        matchStats: createMatchStats(values, summonerName),
+      };
+      res.status(200).send(data);
     })
     .catch(err => {
       console.log(err);
