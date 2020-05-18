@@ -56,7 +56,8 @@ export const MatchListContainer = connect(
     matchMetas: {
       summonerName: state.name,
       server: state.server,
-      matchList: state.matchList
+      matchList: state.matchList,
+      hasMore: state.endIndex < state.matchList.length,
     }
   }),
   dispatch => ({

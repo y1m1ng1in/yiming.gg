@@ -36,9 +36,13 @@ const MatchList = ({ indexRange, matchMetas, onShowMore=f=>f }) => {
           )
         }
       </ul>
-      <div onClick={getMoreMatches}>
-        Show More...
-      </div>
+      {
+        matchMetas.hasMore ?
+          <div onClick={getMoreMatches}>
+            Show More...
+          </div> : ""
+      }
+      
     </div>  
   );
 }

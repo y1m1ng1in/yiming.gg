@@ -185,7 +185,7 @@ app.post('/more', function(req, res) {
   let indexStart   = req.body.expectedNextIndexStart;
 
   let indexEnd = 
-    indexStart + maximumRequestForMatches >= gameIds.length 
+    indexStart + maximumRequestForMatches > gameIds.length 
     ? gameIds.length - 1
     : indexStart + maximumRequestForMatches;
 

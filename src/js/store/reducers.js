@@ -25,6 +25,7 @@ export const startIndex = (state=0, action) => {
 
 export const endIndex = (state=0, action) => {
   if(action.type === "get_more_match_stats") {
+    console.log("end index:", state + action.matchStats.length)
     return state + action.matchStats.length;
   } else {
     return state;
