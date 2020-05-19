@@ -35,7 +35,8 @@ def gen_image_list(json_file):
   return image_list
 
 
-def gen_spritesheet(col, directory, image_list, write_to, css_filename, class_prefix, size_percentage=1):
+def gen_spritesheet(col, directory, image_list, write_to, css_filename, 
+                    class_prefix, spritesheet_filepath, size_percentage=1):
   css_rules = []
 
   col_index, row_index = 0, 0
@@ -81,7 +82,10 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename, class_pr
   for img in image_row[0]:
     width += img.shape[1]
 
-  gen_css_file(css_filename, write_to, width, height, size_percentage, css_rules)
+  gen_css_file(
+    css_filename, spritesheet_filepath, width, 
+    height, size_percentage, css_rules
+  )
 
   spritesheet = cv2.vconcat([cv2.hconcat(col) for col in image_row])
   cv2.imwrite(write_to, spritesheet)
@@ -94,15 +98,15 @@ def main():
 
   gen_spritesheet(
     10, '../../resources/champion/', champion_image_list, 'champion_spritesheet.png', 
-    '../stylesheets/champion_spritesheet.css', '.champion-')
+    '../stylesheets/champion_spritesheet.css', '.champion-', '../data/champion_spritesheet.png')
 
   gen_spritesheet(
     10, '../../resources/item/', item_image_list, 'item_spritesheet.png', 
-    '../stylesheets/item_spritesheet.css', '.item-')
+    '../stylesheets/item_spritesheet.css', '.item-', '../data/item_spritesheet.png')
 
   gen_spritesheet(
     10, '../../resources/spell/', summoner_image_list, 'summoner_spritesheet.png', 
-    '../stylesheets/summoner_spritesheet.css', '.summoner-')
+    '../stylesheets/summoner_spritesheet.css', '.summoner-', '../data/summoner_spritesheet.png')
 
 
 if __name__ == '__main__':
