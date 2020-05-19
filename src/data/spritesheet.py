@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import json
+import argparse
 
 def gen_css_rule(classname, x, y, width, height, percentage):
   return {
@@ -96,17 +97,73 @@ def main():
   item_image_list     = gen_image_list('itemLookup.json')
   summoner_image_list = gen_image_list('summonerLookup.json')
 
-  gen_spritesheet(
-    10, '../../resources/champion/', champion_image_list, 'champion_spritesheet.png', 
-    '../stylesheets/champion_spritesheet.css', '.champion-', '../data/champion_spritesheet.png')
+  parser = argparse.ArgumentParser(
+    description='Generate spritesheets and corresponding css files')
+  
+  parser.add_argument(
+    '--champion-css', '-c', type=str, default="champion_spritesheet.css",
+    help="the name of the output css for champion spritesheet")
 
-  gen_spritesheet(
-    10, '../../resources/item/', item_image_list, 'item_spritesheet.png', 
-    '../stylesheets/item_spritesheet.css', '.item-', '../data/item_spritesheet.png')
+  parser.add_argument(
+    '--item-css', '-i', type=str, default="item_spritesheet.css",
+    help="the name of the output css for item spritesheet")
 
-  gen_spritesheet(
-    10, '../../resources/spell/', summoner_image_list, 'summoner_spritesheet.png', 
-    '../stylesheets/summoner_spritesheet.css', '.summoner-', '../data/summoner_spritesheet.png')
+  parser.add_argument(
+    '--summoner-css', '-s', type=str, default="summoner_spritesheet.css",
+    help="the name of the output css for summoner spell spritesheet")
+
+  parser.add_argument(
+    '--prefix', '-p', type=str, default="",
+    help="add prefix for each css rules"
+  )
+
+  parser.add_argument(
+    '--size', '-S', type=float, default=1.0,
+    help="percentage resize spritesheet"
+  )
+
+  parser.add_argument(
+    '--exclude-champion', action="store_true",
+    help="do not generate champion")
+
+  parser.add_argument(
+    '--exclude-item', action="store_true",
+    help="do not generate item")
+  
+  parser.add_argument(
+    '--exclude-summoner', action="store_true",
+    help="do not generate summoner")
+
+  args = parser.parse_args()
+  
+  champion_css = '../stylesheets/' + args.champion_css
+  item_css     = '../stylesheets/' + args.item_css
+  summoner_css = '../stylesheets/' + args.summoner_css
+  
+  champion_css_prefix = '.champion-' + args.prefix + '-'
+  item_css_prefix     = '.item-' + args.prefix + '-'
+  summoner_css_prefix = '.summoner-' + args.prefix + '-'
+
+  exclude_champion = args.exclude_champion
+  exclude_item     = args.exclude_item
+  exclude_summoner = args.exclude_summoner
+
+  percentage = args.size
+
+  if not exclude_champion:
+    gen_spritesheet(
+      10, '../../resources/champion/', champion_image_list, 'champion_spritesheet.png', 
+      champion_css, champion_css_prefix, '../data/champion_spritesheet.png', size_percentage=percentage)
+
+  if not exclude_item:
+    gen_spritesheet(
+      10, '../../resources/item/', item_image_list, 'item_spritesheet.png', 
+      item_css, item_css_prefix, '../data/item_spritesheet.png', size_percentage=percentage)
+
+  if not exclude_summoner:
+    gen_spritesheet(
+      10, '../../resources/spell/', summoner_image_list, 'summoner_spritesheet.png', 
+      summoner_css, summoner_css_prefix, '../data/summoner_spritesheet.png', size_percentage=percentage)
 
 
 if __name__ == '__main__':
