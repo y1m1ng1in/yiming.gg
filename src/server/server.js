@@ -1,4 +1,5 @@
 import React from "react";
+import ignoreStyles from 'ignore-styles'
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import App from '../js/App';
@@ -7,6 +8,7 @@ import { base, matchList, matchData } from "./api";
 
 let express    = require('express');
 let path       = require('path');
+let fs         = require('fs');
 let https      = require('https');
 let bodyParser = require('body-parser');
 let rp         = require('request-promise');
@@ -16,6 +18,8 @@ const maximumRequestForMatches
   = require('../config.json')["match-data-maximum-request"];
 
 const fileAssets = express.static(path.join(__dirname, '../../dist'));
+
+const staticCss = fs.readFileSync(path.join(__dirname, '../../dist/styles.css'));
 
 const emptyStore = storeFactory({ 
   hasSearchedSummoner: false,
@@ -28,6 +32,7 @@ const basePage = (html, state={}) => `
   <head>
       <meta charset="utf-8">
       <title>Yiming.GG</title>
+      <style>${staticCss}</style>
   </head>
   <body>
   <div id="app">${html}</div>

@@ -1,4 +1,5 @@
 import React from "react";
+import '../../stylesheets/champion_spritesheet.css';
 
 const MatchDetail = ({ matchData }) => 
   <div>
@@ -6,6 +7,7 @@ const MatchDetail = ({ matchData }) =>
     {matchData.summonerStat.kills}/
     {matchData.summonerStat.deaths}/
     {matchData.summonerStat.assists}
+    <div className="champion-266"></div>
   </div>
 
 export default MatchDetail;
