@@ -35,6 +35,13 @@ def gen_image_list(json_file):
   f.close()
   return image_list
 
+def gen_icon_image_list():
+  image_names = [
+    'mostBearDamage.png', 'mostDamageIcon.png', 
+    'mostGoldEarned.png', 'mostKills.png'
+  ]
+  key = ['bear', 'damage', 'gold', 'kill']
+  return zip(key, image_names)
 
 def gen_spritesheet(col, directory, image_list, write_to, css_filename, 
                     class_prefix, spritesheet_filepath, image_size, size_percentage=1):
@@ -43,9 +50,9 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename,
   col_index, row_index = 0, 0
   image_row, image_col = [], []
   for key, image in image_list:
-    img = cv2.imread(directory + image)
+    img = cv2.imread(directory + image, cv2.IMREAD_UNCHANGED)
     if img.shape[0] != image_size[0] or img.shape[1] != image_size[1]:
-      img = cv2.resize(image_size)
+      img = cv2.resize(img, image_size)
     image_col.append(img)
 
     css_rules.append(
@@ -76,8 +83,9 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename,
     width += img.shape[1]
   col_padding = width - last_row_width
   row_padding = last_row_height
-  padding = np.zeros([row_padding, col_padding, 3], np.uint8)
-  image_row[-1].append(padding)
+  if col_padding > 0:
+    padding = np.zeros([row_padding, col_padding, 3], np.uint8)
+    image_row[-1].append(padding)
 
   width, height = 0, 0
   for imgs in image_row:
@@ -98,6 +106,7 @@ def main():
   champion_image_list = gen_image_list('championLookup.json')
   item_image_list     = gen_image_list('itemLookup.json')
   summoner_image_list = gen_image_list('summonerLookup.json')
+  match_icon_list     = gen_icon_image_list()
 
   parser = argparse.ArgumentParser(
     description='Generate spritesheets and corresponding css files')
@@ -113,6 +122,10 @@ def main():
   parser.add_argument(
     '--summoner-css', '-s', type=str, default="summoner_spritesheet.css",
     help="the name of the output css for summoner spell spritesheet")
+
+  parser.add_argument(
+    '--match-icon-css', '-m', type=str, default="match_icon_spritesheet.css",
+    help="the name of the output css for match icon spritesheet")
 
   parser.add_argument(
     '--prefix', '-p', type=str, default="",
@@ -136,19 +149,26 @@ def main():
     '--exclude-summoner', action="store_true",
     help="do not generate summoner")
 
+  parser.add_argument(
+    '--exclude-match-icon', action="store_true",
+    help="do not generate match icon")
+
   args = parser.parse_args()
   
-  champion_css = '../stylesheets/' + args.champion_css
-  item_css     = '../stylesheets/' + args.item_css
-  summoner_css = '../stylesheets/' + args.summoner_css
+  champion_css   = '../stylesheets/' + args.champion_css
+  item_css       = '../stylesheets/' + args.item_css
+  summoner_css   = '../stylesheets/' + args.summoner_css
+  match_icon_css = '../stylesheets/' + args.match_icon_css
   
-  champion_css_prefix = '.champion-' + args.prefix + '-'
-  item_css_prefix     = '.item-' + args.prefix + '-'
-  summoner_css_prefix = '.summoner-' + args.prefix + '-'
+  champion_css_prefix   = '.champion-' + args.prefix + '-'
+  item_css_prefix       = '.item-' + args.prefix + '-'
+  summoner_css_prefix   = '.summoner-' + args.prefix + '-'
+  match_icon_css_prefix = '.match-icon-' + args.prefix + '-'
 
-  exclude_champion = args.exclude_champion
-  exclude_item     = args.exclude_item
-  exclude_summoner = args.exclude_summoner
+  exclude_champion   = args.exclude_champion
+  exclude_item       = args.exclude_item
+  exclude_summoner   = args.exclude_summoner
+  exclude_match_icon = args.exclude_match_icon
 
   percentage = args.size
 
@@ -169,6 +189,12 @@ def main():
       10, '../../resources/spell/', summoner_image_list, 'summoner_spritesheet.png', 
       summoner_css, summoner_css_prefix, '../data/summoner_spritesheet.png', 
       (64, 64), size_percentage=percentage)
+  
+  if not exclude_match_icon:
+    gen_spritesheet(
+      10, '../../assets/matchListIcons/', match_icon_list, 'match_icon_spritesheet.png',
+      match_icon_css, match_icon_css_prefix, '../data/match_icon_spritesheet.png',
+      (20, 20), size_percentage=percentage)
 
 
 if __name__ == '__main__':
