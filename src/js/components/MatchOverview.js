@@ -55,6 +55,15 @@ const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=
           {
             outstanding.mostDamageTaken ? <div className="most-damage-taken"></div> : ""
           }
+          {
+            outstanding.tripleKills ? <div className="triple">3</div> : ""
+          }
+          {
+            outstanding.quadraKills ? <div className="quadra">4</div> : ""
+          }
+          {
+            outstanding.pentaKills ? <div className="panta">5</div> : ""
+          }
         </div>
       </div>
     </li>

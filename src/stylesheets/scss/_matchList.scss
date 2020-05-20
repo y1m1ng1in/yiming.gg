@@ -5,6 +5,10 @@ $win-bg-color: #7DF17D;
 $lose-bg-color: #F78578;
 $match-list-icon-size: 20px;
 
+$panta-bg-color:#F2402C;
+$quadra-bg-color: #E194F5;
+$triple-bg-color: #F6BFB4;
+
 @mixin result-tag {
   border-radius: 5px;
   text-align: center;
@@ -19,6 +23,16 @@ $match-list-icon-size: 20px;
   width: $match-list-icon-size;
   height: $match-list-icon-size;
   background-size: $match-list-icon-size $match-list-icon-size;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
+}
+
+@mixin multiple-kill-icon {
+  border-radius: $match-list-icon-size / 2;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 0.9rem;
 }
 
 @mixin match-list {
@@ -42,6 +56,9 @@ $match-list-icon-size: 20px;
         .match-list-item-icons {
           display: flex;
           flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 5px;
           .most-kill {
             background: url('../data/mostKills.svg');
             @include match-list-icon;
@@ -57,6 +74,21 @@ $match-list-icon-size: 20px;
           .most-damage-taken {
             background: url('../data/mostDamageTaken.svg');
             @include match-list-icon;
+          }
+          .triple {
+            background-color: $triple-bg-color;
+            @include match-list-icon;
+            @include multiple-kill-icon;
+          }
+          .quadra {
+            background-color: $quadra-bg-color;
+            @include match-list-icon;
+            @include multiple-kill-icon;
+          }
+          .panta {
+            background-color: $panta-bg-color;
+            @include match-list-icon;
+            @include multiple-kill-icon;
           }
         }
       }

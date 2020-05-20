@@ -125,13 +125,22 @@ html, body {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 5px;
 }
 
 .match-list ul li .match-list-item-result .match-list-item-icons .most-kill {
-  background: url(9e66799e89483e39f7a20f882073f640.svg);
+  background: url(d990cc709de084f9ffbb2a7d8cfb36f8.svg);
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
 }
 
 .match-list ul li .match-list-item-result .match-list-item-icons .most-gold {
@@ -139,6 +148,9 @@ html, body {
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
 }
 
 .match-list ul li .match-list-item-result .match-list-item-icons .most-damage-dealt {
@@ -146,6 +158,9 @@ html, body {
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
 }
 
 .match-list ul li .match-list-item-result .match-list-item-icons .most-damage-taken {
@@ -153,6 +168,51 @@ html, body {
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
+}
+
+.match-list ul li .match-list-item-result .match-list-item-icons .triple {
+  background-color: #F6BFB4;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 0.9rem;
+}
+
+.match-list ul li .match-list-item-result .match-list-item-icons .quadra {
+  background-color: #E194F5;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 0.9rem;
+}
+
+.match-list ul li .match-list-item-result .match-list-item-icons .panta {
+  background-color: #F2402C;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 4px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 0.9rem;
 }
 
 .match-list ul li .match-list-item-meta {
