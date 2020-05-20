@@ -1,6 +1,18 @@
 $border-color: #E9EAE9;
 $border-size: 1px;
 $font-color: black;
+$win-bg-color: #7DF17D;
+$lose-bg-color: #F78578;
+
+@mixin result-tag {
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-style: italic;
+  width: 70%;
+  margin: auto;
+}
 
 @mixin match-list {
   ul {
@@ -13,11 +25,29 @@ $font-color: black;
       border: $border-size $border-color solid;
       display: flex;
       flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 90px;
       .match-list-item-result {
         flex-basis: 35%;
+        font-size: 1.3rem;
+        text-align: center;
       }
       .match-list-item-meta {
         flex-basis: 35%;
+        font-size: 0.7rem;
+        .win {
+          background-color: $win-bg-color;
+          @include result-tag;
+        }
+        .lose {
+          background-color: $lose-bg-color;
+          @include result-tag;
+        }
+        .meta-info {
+          text-align: center;
+          line-height: 1.5;
+        }
       }
     }
   }

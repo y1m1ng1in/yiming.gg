@@ -1,6 +1,6 @@
 import React from "react";
 import '../../stylesheets/style.css';
-import '../../stylesheets/champion_spritesheet_65.css';
+import '../../stylesheets/champion_spritesheet_60.css';
 
 const printDate = timestamp => {
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -28,14 +28,20 @@ const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
 
   return (
     <li className="match-list-item" onClick={select}>
-      <div className={`champion-65-${champion} sprite`}></div>
-      <div className="match-list-item-result">
-        {matchInfo.win} <br />
-        {kda.kills}/{kda.deaths}/{kda.assists}
-      </div>
+      <div className={`champion-60-${champion} sprite`}></div>
       <div className="match-list-item-meta">
-        {printDate(matchInfo.timestamp)} <br /> 
-        queueId: {matchInfo.queue}
+        {
+          matchInfo.win 
+          ? <div className="win">Victory</div> 
+          : <div className="lose">Defeat</div>
+        }
+        <div className="meta-info">
+          queueId: {matchInfo.queue} <br />
+          {printDate(matchInfo.timestamp)}
+        </div>
+      </div>
+      <div className="match-list-item-result">
+        {kda.kills}/{kda.deaths}/{kda.assists}
       </div>
     </li>
   )

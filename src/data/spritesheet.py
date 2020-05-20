@@ -37,13 +37,15 @@ def gen_image_list(json_file):
 
 
 def gen_spritesheet(col, directory, image_list, write_to, css_filename, 
-                    class_prefix, spritesheet_filepath, size_percentage=1):
+                    class_prefix, spritesheet_filepath, image_size, size_percentage=1):
   css_rules = []
 
   col_index, row_index = 0, 0
   image_row, image_col = [], []
   for key, image in image_list:
     img = cv2.imread(directory + image)
+    if img.shape[0] != image_size[0] or img.shape[1] != image_size[1]:
+      img = cv2.resize(image_size)
     image_col.append(img)
 
     css_rules.append(
@@ -153,17 +155,20 @@ def main():
   if not exclude_champion:
     gen_spritesheet(
       10, '../../resources/champion/', champion_image_list, 'champion_spritesheet.png', 
-      champion_css, champion_css_prefix, '../data/champion_spritesheet.png', size_percentage=percentage)
+      champion_css, champion_css_prefix, '../data/champion_spritesheet.png', 
+      (120, 120), size_percentage=percentage)
 
   if not exclude_item:
     gen_spritesheet(
       10, '../../resources/item/', item_image_list, 'item_spritesheet.png', 
-      item_css, item_css_prefix, '../data/item_spritesheet.png', size_percentage=percentage)
+      item_css, item_css_prefix, '../data/item_spritesheet.png', 
+      (64, 64), size_percentage=percentage)
 
   if not exclude_summoner:
     gen_spritesheet(
       10, '../../resources/spell/', summoner_image_list, 'summoner_spritesheet.png', 
-      summoner_css, summoner_css_prefix, '../data/summoner_spritesheet.png', size_percentage=percentage)
+      summoner_css, summoner_css_prefix, '../data/summoner_spritesheet.png', 
+      (64, 64), size_percentage=percentage)
 
 
 if __name__ == '__main__':

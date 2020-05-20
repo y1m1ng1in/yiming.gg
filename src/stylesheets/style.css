@@ -101,16 +101,53 @@ html, body {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 90px;
 }
 
 .match-list ul li .match-list-item-result {
   -ms-flex-preferred-size: 35%;
   flex-basis: 35%;
+  font-size: 1.3rem;
+  text-align: center;
 }
 
 .match-list ul li .match-list-item-meta {
   -ms-flex-preferred-size: 35%;
   flex-basis: 35%;
+  font-size: 0.7rem;
+}
+
+.match-list ul li .match-list-item-meta .win {
+  background-color: #7DF17D;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-style: italic;
+  width: 70%;
+  margin: auto;
+}
+
+.match-list ul li .match-list-item-meta .lose {
+  background-color: #F78578;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-style: italic;
+  width: 70%;
+  margin: auto;
+}
+
+.match-list ul li .match-list-item-meta .meta-info {
+  text-align: center;
+  line-height: 1.5;
 }
 
 .match-detail {
