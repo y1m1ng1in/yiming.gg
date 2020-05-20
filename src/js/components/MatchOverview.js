@@ -1,7 +1,6 @@
 import React from "react";
 import '../../stylesheets/style.css';
 import '../../stylesheets/champion_spritesheet_60.css';
-import '../../stylesheets/match_icon_spritesheet.css';
 
 const printDate = timestamp => {
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -20,7 +19,7 @@ const printDate = timestamp => {
   }
 }
 
-const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
+const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=f=>f }) => {
   const select = () => {
     console.log("selected", index);
     console.log("win?", matchInfo.win);
@@ -43,8 +42,19 @@ const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
       </div>
       <div className="match-list-item-result">
         {kda.kills}/{kda.deaths}/{kda.assists}
-        <div>
-          <div className="match-icon--damage"></div>
+        <div className="match-list-item-icons">
+          {
+            outstanding.mostKills ? <div className="most-kill"></div> : ""
+          }
+          {
+            outstanding.mostGoldEarned ? <div className="most-gold"></div> : ""
+          }
+          {
+            outstanding.mostDamageDealt ? <div className="most-damage-dealt"></div> : ""
+          }
+          {
+            outstanding.mostDamageTaken ? <div className="most-damage-taken"></div> : ""
+          }
         </div>
       </div>
     </li>

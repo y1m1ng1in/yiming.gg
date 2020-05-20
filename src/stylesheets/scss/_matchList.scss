@@ -3,6 +3,7 @@ $border-size: 1px;
 $font-color: black;
 $win-bg-color: #7DF17D;
 $lose-bg-color: #F78578;
+$match-list-icon-size: 20px;
 
 @mixin result-tag {
   border-radius: 5px;
@@ -12,6 +13,12 @@ $lose-bg-color: #F78578;
   font-style: italic;
   width: 70%;
   margin: auto;
+}
+
+@mixin match-list-icon {
+  width: $match-list-icon-size;
+  height: $match-list-icon-size;
+  background-size: $match-list-icon-size $match-list-icon-size;
 }
 
 @mixin match-list {
@@ -32,6 +39,26 @@ $lose-bg-color: #F78578;
         flex-basis: 35%;
         font-size: 1.3rem;
         text-align: center;
+        .match-list-item-icons {
+          display: flex;
+          flex-direction: row;
+          .most-kill {
+            background: url('../data/mostKills.svg');
+            @include match-list-icon;
+          }
+          .most-gold {
+            background: url('../data/mostGoldEarned.svg');
+            @include match-list-icon;
+          }
+          .most-damage-dealt {
+            background: url('../data/mostDamage.svg');
+            @include match-list-icon;
+          }
+          .most-damage-taken {
+            background: url('../data/mostDamageTaken.svg');
+            @include match-list-icon;
+          }
+        }
       }
       .match-list-item-meta {
         flex-basis: 35%;

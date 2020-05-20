@@ -34,12 +34,47 @@ export const MatchListItem = connect(
     const { index } = ownProps;
     const matchListIndex = startIndex + index;
     const { champion, timestamp, queue } = state.matchList[matchListIndex];
-    const { kills, deaths, assists, win } = state.matchStats[index].summonerStat;
+    const { 
+      kills, deaths, assists, win, tripleKills, 
+      quadraKills, pentaKills, totalDamageDealtToChampions,
+      totalDamageTaken, teamId, goldEarned
+    } = state.matchStats[index].summonerStat;
+    const outstanding = {
+      mostKills: true,
+      mostGoldEarned: true,
+      mostDamageTaken: true,
+      mostDamageDealt: true,
+      tripleKills: tripleKills > 0,
+      quadraKills: quadraKills > 0,
+      pentaKills: pentaKills > 0
+    }
+
+    Object
+      .keys(state.matchStats[index].otherPlayerStat)
+      .forEach(key => {
+        const player = state.matchStats[index].otherPlayerStat[key];
+        if(player.teamId === teamId) {
+          if(player.kills > kills) {
+            outstanding['mostKills'] = false;
+          }
+          if(player.goldEarned > goldEarned) {
+            outstanding['mostGoldEarned'] = false;
+          }
+          if(player.totalDamageTaken > totalDamageTaken) {
+            outstanding['mostDamageTaken'] = false;
+          }
+          if(player.totalDamageDealtToChampions > totalDamageDealtToChampions) {
+            outstanding['mostDamageDealt'] = false;
+          }
+        }
+      });
+
     return {
       champion: champion,
       matchInfo: { timestamp: timestamp, queue: queue, win: win },
       kda: { kills: kills, deaths: deaths, assists: assists },
-      index: index
+      index: index,
+      outstanding: outstanding
     };
   },
   dispatch => ({
