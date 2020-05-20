@@ -7,12 +7,12 @@ const printDate = timestamp => {
   const date   = new Date(timestamp);
   const year   = date.getFullYear();
   const month  = months[date.getMonth()];
-  const day    = date.getDay();
+  const day    = date.getDate();
   const now    = new Date(Date.now());
 
   if(now.getFullYear() === year && 
      now.getMonth() === date.getMonth() && 
-     now.getDay() === day) {
+     now.getDate() === day) {
     return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   } else {
     return `${month} ${day}, ${year}`;
