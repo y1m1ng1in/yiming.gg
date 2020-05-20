@@ -3,7 +3,7 @@
 .app {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(10, 10%);
+  grid-template-rows: repeat(10, 1fr);
   column-gap: 2px;
   row-gap: 2px;
   height: 100vh;
@@ -49,11 +49,37 @@
 .match-detail {
   grid-area: 1 / 2 / span 10 / span 3;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  row-gap: 2px;
+}
+
+.match-graphs {
+  grid-area: 1 / 1 / span 3 / span 1;
+}
+
+.scoreboard {
+  grid-area: 4 / 1 / span 7 / span 1;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  row-gap: 2px;
+  column-gap: 2px;
+}
+
+.indivdual {
+  grid-row: span 2;
+  display: flex;
 }
 
 .summoner-general,
 .match-list,
-.match-detail {
+.match-graphs,
+.indivdual,
+.scoreboard-title-blue,
+.scoreboard-title-red{
   background-color: purple;
   color: white;
 }

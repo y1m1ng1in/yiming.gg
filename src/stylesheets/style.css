@@ -18,8 +18,8 @@ html, body {
   display: grid;
   -ms-grid-columns: (1fr)[4];
   grid-template-columns: repeat(4, 1fr);
-  -ms-grid-rows: (10%)[10];
-  grid-template-rows: repeat(10, 10%);
+  -ms-grid-rows: (1fr)[10];
+  grid-template-rows: repeat(10, 1fr);
   -webkit-column-gap: 2px;
   column-gap: 2px;
   row-gap: 2px;
@@ -255,11 +255,55 @@ html, body {
   -ms-grid-column-span: 3;
   grid-area: 1 / 2 / span 10 / span 3;
   overflow: hidden;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[1];
+  grid-template-columns: repeat(1, 1fr);
+  -ms-grid-rows: (1fr)[10];
+  grid-template-rows: repeat(10, 1fr);
+  row-gap: 2px;
+}
+
+.match-graphs {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 1 / 1 / span 3 / span 1;
+}
+
+.scoreboard {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 7;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 4 / 1 / span 7 / span 1;
+  display: -ms-grid;
+  display: grid;
+  overflow: hidden;
+  -ms-grid-columns: (1fr)[2];
+  grid-template-columns: repeat(2, 1fr);
+  -ms-grid-rows: (1fr)[11];
+  grid-template-rows: repeat(11, 1fr);
+  row-gap: 2px;
+  -webkit-column-gap: 2px;
+  column-gap: 2px;
+}
+
+.indivdual {
+  -ms-grid-row-span: 2;
+  grid-row: span 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .summoner-general,
 .match-list,
-.match-detail {
+.match-graphs,
+.indivdual,
+.scoreboard-title-blue,
+.scoreboard-title-red {
   background-color: purple;
   color: white;
 }
