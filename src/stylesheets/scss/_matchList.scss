@@ -1,0 +1,24 @@
+$border-color: #E9EAE9;
+$border-size: 1px;
+$font-color: black;
+
+@mixin match-list {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      background-color: white;
+      color: $font-color;
+      border: $border-size $border-color solid;
+      display: flex;
+      flex-direction: row;
+      .match-list-item-result {
+        flex-basis: 35%;
+      }
+      .match-list-item-meta {
+        flex-basis: 35%;
+      }
+    }
+  }
+}

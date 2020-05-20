@@ -84,6 +84,35 @@ html, body {
   margin: 0;
 }
 
+.match-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.match-list ul li {
+  background-color: white;
+  color: black;
+  border: 1px #E9EAE9 solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.match-list ul li .match-list-item-result {
+  -ms-flex-preferred-size: 35%;
+  flex-basis: 35%;
+}
+
+.match-list ul li .match-list-item-meta {
+  -ms-flex-preferred-size: 35%;
+  flex-basis: 35%;
+}
+
 .match-detail {
   -ms-grid-row: 1;
   -ms-grid-row-span: 10;

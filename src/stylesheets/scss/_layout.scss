@@ -1,3 +1,5 @@
+@import "matchList";
+
 .app {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -41,6 +43,7 @@
     height: 5%;
     margin: 0;
   }
+  @include match-list;
 }
 
 .match-detail {

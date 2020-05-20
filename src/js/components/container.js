@@ -34,10 +34,10 @@ export const MatchListItem = connect(
     const { index } = ownProps;
     const matchListIndex = startIndex + index;
     const { champion, timestamp, queue } = state.matchList[matchListIndex];
-    const { kills, deaths, assists } = state.matchStats[index].summonerStat;
+    const { kills, deaths, assists, win } = state.matchStats[index].summonerStat;
     return {
       champion: champion,
-      matchInfo: { timestamp: timestamp, queue: queue },
+      matchInfo: { timestamp: timestamp, queue: queue, win: win },
       kda: { kills: kills, deaths: deaths, assists: assists },
       index: index
     };
