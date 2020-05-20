@@ -128,20 +128,22 @@ app.post('/search', function(req, res) {
   let summonerName = req.body['player-name'];
   let server       = req.body['server'];
   let state        = {};
-  let url          = base(summonerName, server, apiKey);
+  let url          = base(summonerName, server);
   let initStore    = {};
   let startIndex   = 0;
   let endIndex     = 0;
 
-  rp(url, {json: true})
+  const options = { uri: url, headers: { 'X-Riot-Token': apiKey }, json: true };
+  rp(options)
     .then(value => {
       console.log(value);
       state = { ...value, server: server }
       initStore = { hasSearchedSummoner: true, ...value, server: server };
-      return rp(
-        matchList(state.accountId, state.server, apiKey), 
-        {json: true}
-      );
+      return rp({
+        uri: matchList(state.accountId, state.server), 
+        headers: { 'X-Riot-Token': apiKey },
+        json: true
+      });
     })
     .then(value => {
       state = {
@@ -164,8 +166,10 @@ app.post('/search', function(req, res) {
       return Promise.all([
         ...value.matches
             .slice(state.startIndex, state.endIndex)
-            .map(m => matchData(m.gameId, server, apiKey))
-            .map(url => rp(url, {json: true}))
+            .map(m => matchData(m.gameId, server))
+            .map(url => rp({
+              uri: url, headers: { 'X-Riot-Token': apiKey }, json: true
+            }))
       ]);
     })
     .then(values => {
@@ -175,7 +179,6 @@ app.post('/search', function(req, res) {
         indexOfMatchListSelected: 0
       };
       initStore = storeFactory(initStore);
-      // res.send(initStore.getState());
       res.send(basePage(html(initStore), initStore.getState()));
     })
     .catch(err => {
