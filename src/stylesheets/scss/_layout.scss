@@ -1,0 +1,56 @@
+.app {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(10, 10%);
+  column-gap: 2px;
+  row-gap: 2px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.search-form {
+  grid-area: 1 / 4 / span 2 / span 1;
+}
+
+.summoner-overall {
+  display: grid;
+  overflow: hidden;
+  grid-area: 3 / 1 / span 8 / span 4;
+  column-gap: 2px;
+  row-gap: 2px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.summoner-general {
+  grid-area: 1 / 1 / span 2 / span 1;
+}
+
+.match-list {
+  grid-area: 3 / 1 / span 8 / span 1;
+  margin: 0;
+  overflow: hidden;
+  ul {
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 0;
+  }
+  .show-more {
+    height: 5%;
+    margin: 0;
+  }
+}
+
+.match-detail {
+  grid-area: 1 / 2 / span 10 / span 3;
+  overflow: hidden;
+}
+
+.summoner-general,
+.match-list,
+.match-detail {
+  background-color: purple;
+  color: white;
+}

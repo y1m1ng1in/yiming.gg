@@ -1,4 +1,5 @@
 import React from "react";
+import '../../stylesheets/style.css';
 
 const Form = ({onSubmit=f=>f}) => {
   const submit = e => {
@@ -11,7 +12,7 @@ const Form = ({onSubmit=f=>f}) => {
   }
 
   return (
-    <form method="post" action="/search" onSubmit={submit}>
+    <form className="search-form" method="post" action="/search" onSubmit={submit}>
       <label htmlFor="player-name">Player name</label>
       <fieldset>
         <legend>Server</legend>

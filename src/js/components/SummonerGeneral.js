@@ -1,7 +1,8 @@
 import React from "react";
+import '../../stylesheets/style.css';
 
 const SummonerGeneral = ({name, level, icon}) => 
-  <section>
+  <section className="summoner-general">
     <h3>{name}</h3>
     <p>summoner level: {level}</p>
     <p>icon Id: {icon}</p>

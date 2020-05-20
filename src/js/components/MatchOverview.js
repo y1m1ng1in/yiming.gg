@@ -1,4 +1,5 @@
 import React from "react";
+import '../../stylesheets/style.css';
 
 const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
   const select = () => {
@@ -7,7 +8,7 @@ const MatchOverview = ({ champion, kda, matchInfo, index, onSelect=f=>f }) => {
   }
 
   return (
-    <li>
+    <li className="match-list-item">
       <div onClick={select}>
         <p>{matchInfo.win}</p>
         <p>champion used: {champion}</p>

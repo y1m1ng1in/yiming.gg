@@ -1,19 +1,24 @@
 import React from "react";
 import {
   SummonerGeneralInfo, MatchListContainer, MatchDetailContainer
-} from "./container"
+} from "./container";
+import '../../stylesheets/style.css';
 
-const Summoner = ({ hasSearchedSummoner }) => 
-  <div>
-    {
-      hasSearchedSummoner 
-      ? <div>
-          <SummonerGeneralInfo />
-          <MatchListContainer />
-          <MatchDetailContainer />
-        </div> 
-      : ""
-    }
-  </div>
+const Summoner = ({ hasSearchedSummoner }) => {
+  if(hasSearchedSummoner) {
+    return (
+      <div className="summoner-overall">
+        <SummonerGeneralInfo />
+        <MatchListContainer />
+        <MatchDetailContainer />
+      </div>
+    );
+  } else {
+    return "";
+  }
+}
+
+
+
 
 export default Summoner;

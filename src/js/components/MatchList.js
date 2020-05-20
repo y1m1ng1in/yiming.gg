@@ -1,5 +1,6 @@
 import React from "react";
-import { MatchListItem } from "./container"
+import { MatchListItem } from "./container";
+import '../../stylesheets/style.css';
 
 const MatchList = ({ indexRange, matchMetas, onShowMore=f=>f }) => {
   const getMoreMatches = e => {
@@ -28,7 +29,7 @@ const MatchList = ({ indexRange, matchMetas, onShowMore=f=>f }) => {
   }
 
   return (
-    <div>
+    <div className="match-list">
       <ul>
         {
           [...Array(indexRange).keys()].map(index => 
@@ -38,11 +39,10 @@ const MatchList = ({ indexRange, matchMetas, onShowMore=f=>f }) => {
       </ul>
       {
         matchMetas.hasMore ?
-          <div onClick={getMoreMatches}>
+          <div className="show-more" onClick={getMoreMatches}>
             Show More...
           </div> : ""
-      }
-      
+      }   
     </div>  
   );
 }

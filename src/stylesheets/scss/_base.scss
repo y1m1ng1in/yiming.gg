@@ -1,0 +1,18 @@
+$bg-color: #E7F2E5;
+$font-size-base: 18px;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+  font-family: 'Montserrat', sans-serif;
+  font-size: $font-size-base;
+  background-color: $bg-color;
+}
+
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

@@ -27,3 +27,5 @@ package-lock.json
 ./src/config.json
 
 /resources
+
+prepros-6.config
