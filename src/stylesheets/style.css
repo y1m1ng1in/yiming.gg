@@ -305,40 +305,41 @@ html, body {
   padding-right: 5px;
 }
 
-.indivdual .champion {
-  border-radius: 21px;
-  margin-right: 2px;
+.indivdual .individual-info-and-items {
+  display: -ms-grid;
+  display: grid;
+  height: 38.8px;
+  -ms-grid-columns: 135px (28.8px)[7];
+  grid-template-columns: 135px repeat(7, 28.8px);
+  -ms-grid-rows: (1fr)[2];
+  grid-template-rows: repeat(2, 1fr);
+  -webkit-column-gap: 2px;
+  column-gap: 2px;
+  row-gap: 1px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.indivdual .scoreboard-summoner-spells {
-  margin-right: 2px;
+.indivdual .individual-info-and-items .individual-name {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 1 / 1 / span 1 / span 1;
 }
 
-.indivdual .scoreboard-summoner-spells div {
-  margin: 1px;
+.indivdual .individual-info-and-items .individual-kda {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 2 / 1 / span 1 / span 1;
 }
 
-.indivdual .scoreboard-individual-info {
-  width: 135px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.indivdual .empty-item {
-  background-color: #E4E3E3;
-  width: 28.8px;
-  height: 28.8px;
-}
-
-.indivdual .item-sprite {
-  border-radius: 3px;
-  margin-right: 2px;
-}
-
-.indivdual .scoreboard-individual-cs {
-  text-align: center;
-  width: 50px;
-  font-size: 0.8rem;
+.indivdual .individual-info-and-items .item-sprite {
+  -ms-grid-row-span: 2;
+  grid-row: span 2;
 }
 
 .indivdual .scoreboard-perk-runes {
@@ -357,6 +358,40 @@ html, body {
   align-items: center;
 }
 
+.indivdual .champion {
+  border-radius: 21px;
+  margin-right: 2px;
+}
+
+.indivdual .scoreboard-summoner-spells {
+  margin-right: 2px;
+}
+
+.indivdual .scoreboard-summoner-spells div {
+  margin: 1px;
+}
+
+.indivdual .individual-info-and-items div {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.indivdual .empty-item {
+  background-color: #E4E3E3;
+  width: 28.8px;
+  height: 28.8px;
+}
+
+.indivdual .item-sprite {
+  border-radius: 3px;
+}
+
+.indivdual .scoreboard-individual-cs {
+  text-align: center;
+  width: 70px;
+  font-size: 0.8rem;
+}
+
 .summoner-general,
 .match-list,
 .match-graphs,
@@ -364,4 +399,46 @@ html, body {
 .scoreboard-title-red {
   background-color: purple;
   color: white;
+}
+
+@media (max-width: 1388px) and (min-width: 1024px) {
+  .indivdual .individual-info-and-items {
+    height: 77.6px;
+    -ms-grid-columns: 70px (28.8px)[4];
+    grid-template-columns: 70px repeat(4, 28.8px);
+    -ms-grid-rows: 20px (1fr)[2];
+    grid-template-rows: 20px repeat(2, 1fr);
+  }
+  .indivdual .individual-info-and-items .individual-name {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 4;
+    grid-area: 1 / 2 / span 1 / span 4;
+  }
+  .indivdual .individual-info-and-items .individual-kda {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-area: 1 / 1 / span 3 / span 1;
+  }
+  .indivdual .individual-info-and-items .item-sprite {
+    -ms-grid-row-span: 1;
+    grid-row: span 1;
+  }
+  .match-graphs {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-area: 1 / 1 / span 3 / span 1;
+  }
+  .scoreboard {
+    -ms-grid-row: 4;
+    -ms-grid-row-span: 7;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-area: 4 / 1 / span 7 / span 1;
+  }
 }

@@ -75,6 +75,30 @@
   grid-row: span 2;
   display: flex;
   align-items: center;
+  .individual-info-and-items {
+    display: grid;
+    height: $item-sprite-size + 10px;
+    grid-template-columns: $scoreboard-individual-info-width repeat(7, $item-sprite-size);
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 2px;
+    row-gap: 1px;
+    align-items: center;
+    .individual-name {
+      grid-area: 1 / 1 / span 1 / span 1;
+    }
+    .individual-kda {
+      grid-area: 2 / 1 / span 1 / span 1;
+    }
+    .item-sprite {
+      grid-row: span 2;
+    }
+  }
+  .scoreboard-perk-runes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   @include indivdual;
 }
 

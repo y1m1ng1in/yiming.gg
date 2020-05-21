@@ -1,0 +1,28 @@
+@import "scoreboard";
+
+@media (max-width: 1388px) and (min-width: 1024px) {
+  .indivdual {
+    .individual-info-and-items {
+      height: $item-sprite-size * 2 + 20px;
+      grid-template-columns: $scoreboard-individual-kda-width repeat(4, $item-sprite-size);
+      grid-template-rows: 20px repeat(2, 1fr);
+      .individual-name {
+        grid-area: 1 / 2 / span 1 / span 4;
+      }
+      .individual-kda {
+        grid-area: 1 / 1 / span 3 / span 1;
+      }
+      .item-sprite {
+        grid-row: span 1;
+      }
+    }
+  }
+  
+  .match-graphs {
+    grid-area: 1 / 1 / span 3 / span 1;
+  }
+
+  .scoreboard {
+    grid-area: 4 / 1 / span 7 / span 1;
+  }  
+}
