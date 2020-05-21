@@ -46,4 +46,10 @@ $scoreboard-font-size: 0.8rem;
     width: $cs-width;
     font-size: $scoreboard-font-size;
   }
+  .scoreboard-perk-runes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

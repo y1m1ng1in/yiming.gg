@@ -7,7 +7,7 @@ const MatchDetail = ({ matchData }) => {
   const scoreboardData = matchData => {
     const key = [
       'championId', 'champLevel', 'kills', 'deaths', 'assists', 'spell1Id', 
-      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned'
+      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned','perk0', 'perkSubStyle'
     ];
     const itemKey = [
       'item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6'

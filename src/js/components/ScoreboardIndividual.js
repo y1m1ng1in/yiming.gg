@@ -2,6 +2,8 @@ import React from "react";
 import '../../stylesheets/champion_spritesheet_35.css';
 import '../../stylesheets/summoner_spritesheet_35.css';
 import '../../stylesheets/item_spritesheet_45.css';
+import '../../stylesheets/perk_spritesheet_70.css';
+import '../../stylesheets/rune_spritesheet_50.css';
 
 const ScoreboardIndividual = ({ champion, spell, summoner, items }) => {
   return (
@@ -10,6 +12,10 @@ const ScoreboardIndividual = ({ champion, spell, summoner, items }) => {
       <div className="scoreboard-summoner-spells">
         <div className={`summoner-35-${spell.spellId1} sprite`}></div>
         <div className={`summoner-35-${spell.spellId2} sprite`}></div>
+      </div>
+      <div className="scoreboard-perk-runes">
+        <div className={`rune-50-${summoner.perk0} sprite`}></div>
+        <div className={`perk-70-${summoner.perkSubStyle} sprite`}></div>
       </div>
       <div className="scoreboard-individual-info">
         {summoner.name} <br />
