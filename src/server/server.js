@@ -67,7 +67,15 @@ const transformMatchStat = (match, summonerName) => {
     });
   }
 
+  let getMatchTeamStats = () => {
+    result['team'] = {}
+    match.teams.forEach(team => {
+      result.team[team.teamId] = team
+    });
+  }
+
   getParticipants(match.participants, match.participantIdentities);
+  getMatchTeamStats();
 
   return result;
 }
@@ -97,7 +105,8 @@ const createMatchStats = (originalMatchStats, summonerName) => {
           id != m.summonerParticipantId &&
           id != 'lose' &&
           id != 'win' &&
-          id != 'summonerParticipantId'
+          id != 'summonerParticipantId' &&
+          id != 'team'
         )
         .forEach(id => {
           otherPlayerStat[id] = {};
@@ -109,7 +118,8 @@ const createMatchStats = (originalMatchStats, summonerName) => {
           }
         });
       return {
-        summonerStat: summonerStat,
+        teamStat:        m.team,
+        summonerStat:    summonerStat,
         otherPlayerStat: otherPlayerStat
       }
     })

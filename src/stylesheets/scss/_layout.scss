@@ -65,10 +65,23 @@
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(11, 1fr);
+  grid-template-rows: 40px repeat(5, 1fr);
   row-gap: 2px;
   column-gap: 2px;
   @include scoreboard;
+}
+
+.scoreboard-title {
+  .scoreboard-title-items {
+    display: flex;
+    @include scoreboard-title;
+  }
+  .scoreboard-title-team-stat {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+    @include scoreboard-team-stat;
+  }
 }
 
 .indivdual {
@@ -100,6 +113,29 @@
     align-items: center;
   }
   @include indivdual;
+}
+
+@mixin scoreboard-grid-area {
+  @for $i from 1 through 5 {
+    .summoner-team-#{$i} {
+      grid-column-start: 1;
+      grid-column-end: span 1;
+      grid-row-start: $i + 1;
+      grid-row-end: span 1;
+    }
+    .other-team-#{$i} {
+      grid-column-start: 2;
+      grid-column-end: span 1;
+      grid-row-start: $i + 1;
+      grid-row-end: span 1;
+    }
+  }
+}
+
+@include scoreboard-grid-area;
+
+.summonerTeam {
+  grid-column: 1;
 }
 
 .summoner-general,

@@ -5,9 +5,9 @@ import '../../stylesheets/item_spritesheet_45.css';
 import '../../stylesheets/perk_spritesheet_70.css';
 import '../../stylesheets/rune_spritesheet_50.css';
 
-const ScoreboardIndividual = ({ champion, spell, summoner, items }) => {
+const ScoreboardIndividual = ({ champion, spell, summoner, items, className }) => {
   return (
-    <div className="indivdual">
+    <div className={`indivdual ${className}`}>
       <div className={`champion-35-${champion} sprite champion`}></div>
       <div className="scoreboard-summoner-spells">
         <div className={`summoner-35-${spell.spellId1} sprite`}></div>

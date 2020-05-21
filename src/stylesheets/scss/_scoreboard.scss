@@ -3,11 +3,16 @@ $scoreboard-border-color: #ebeaea;
 $item-sprite-size: 28.8px;
 $item-sprite-empty-color: #E4E3E3;
 
+$summoner-spell-sprite-size: 25px;
+$summoner-perk-sprite-size: 32px;
+
 $scoreboard-individual-info-width: 135px;
 $cs-width: 70px;
 $scoreboard-individual-kda-width: 70px;
 
 $scoreboard-font-size: 0.8rem;
+
+$scoreboard-icon-size: 20px;
 
 @mixin scoreboard {
   background-color: white;
@@ -45,5 +50,62 @@ $scoreboard-font-size: 0.8rem;
     text-align: center;
     width: $cs-width;
     font-size: $scoreboard-font-size;
+  }
+}
+
+@mixin scoreboard-icon {
+  display: inline-block;
+  width: $scoreboard-icon-size;
+  height: $scoreboard-icon-size;
+  background-size: $scoreboard-icon-size $scoreboard-icon-size;
+}
+
+@mixin scoreboard-title {
+  font-size: 0.7rem;
+  .scoreboard-title-champion {
+    width: $champion-spritesheet-size + $summoner-spell-sprite-size + $summoner-perk-sprite-size;
+    text-align: center;
+  }
+  .scoreboard-title-kda {
+    width: $scoreboard-individual-info-width + 15px;
+    text-align: center;
+  }
+  .scoreboard-title-item {
+    width: $item-sprite-size * 7 + 6 * 2px;
+    text-align: center;
+  }
+  .scoreboard-title-cs {
+    width: $cs-width;
+    text-align: center;
+  }
+}
+
+@mixin scoreboard-team-stat-item-margin {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@mixin scoreboard-team-stat {
+  font-size: 0.7rem;
+  .scoreboard-title-tower {
+    .tower-icon {
+      background: url('../data/tower.svg');
+      @include scoreboard-icon;
+    }
+    @include scoreboard-team-stat-item-margin;
+  }
+  .scoreboard-title-dragon {
+    .dragon-icon {
+      background: url('../data/dragon.svg');
+      @include scoreboard-icon;
+    }
+    @include scoreboard-team-stat-item-margin;
+  }
+  .scoreboard-title-baron {
+    .baron-icon {
+      background: url('../data/baron.svg');
+      @include scoreboard-icon;
+    }
+    @include scoreboard-team-stat-item-margin;
   }
 }

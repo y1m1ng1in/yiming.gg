@@ -7,25 +7,42 @@ const MatchDetail = ({ matchData }) => {
   const scoreboardData = matchData => {
     const key = [
       'championId', 'champLevel', 'kills', 'deaths', 'assists', 'spell1Id', 
-      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned','perk0', 'perkSubStyle'
+      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned','perk0', 
+      'perkSubStyle', 'win', 'neutralMinionsKilled'
     ];
     const itemKey = [
       'item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6'
     ];
+    const playerObj = sourceObj => {
+      let obj = {};
+      key.forEach(k => obj[k] = sourceObj[k]);
+      obj['items'] = itemKey.map(i => sourceObj[i]);
+      obj['name']  = sourceObj['summonerName'];
+      obj['cs']    = obj['neutralMinionsKilled'] + obj['totalMinionsKilled'];
+      return obj;
+    }
 
-    let summoner = {}
-    key.forEach(k => summoner[k] = matchData.summonerStat[k]);
-    summoner['items'] = itemKey.map(i => matchData.summonerStat[i]);
+    let summoner            = playerObj(matchData.summonerStat);
+    let summonerTeamId      = summoner['teamId'];
+    let summonerTeamPlayers = [ summoner ];
+    let otherTeamPlayers    = [];
+    let otherTeamId         = null;
 
-    let otherplayers = Object.keys(matchData.otherPlayerStat).map(p => {
-      let player = {}
-      key.forEach(k => player[k] = matchData.otherPlayerStat[p][k]);
-      player['items'] = itemKey.map(i => matchData.otherPlayerStat[p][i]);
-      player['name'] = matchData.otherPlayerStat[p]['summonerName'];
-      return player;
+    Object.keys(matchData.otherPlayerStat).forEach(p => {
+      if(matchData.otherPlayerStat[p]['teamId'] == summonerTeamId) {
+        summonerTeamPlayers.push(playerObj(matchData.otherPlayerStat[p]));
+      } else {
+        otherTeamPlayers.push(playerObj(matchData.otherPlayerStat[p]));
+        otherTeamId = matchData.otherPlayerStat[p]['teamId'];
+      }
     });
- 
-    return [summoner, ...otherplayers];
+    return { 
+      summonerTeamStat: matchData.teamStat[summonerTeamId],
+      otherTeamStat:    matchData.teamStat[otherTeamId],
+      summonerWin:      summoner['win'], 
+      summonerTeam:     summonerTeamPlayers, 
+      otherTeam:        otherTeamPlayers
+    };
   }
 
   return (
