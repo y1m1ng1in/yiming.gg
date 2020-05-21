@@ -12,7 +12,7 @@ $scoreboard-individual-kda-width: 70px;
 
 $scoreboard-font-size: 0.8rem;
 
-$scoreboard-icon-size: 20px;
+$scoreboard-icon-size: 15px;
 
 @mixin scoreboard {
   background-color: white;
@@ -81,8 +81,8 @@ $scoreboard-icon-size: 20px;
 }
 
 @mixin scoreboard-team-stat-item-margin {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 @mixin scoreboard-team-stat {

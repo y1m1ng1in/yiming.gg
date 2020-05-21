@@ -20,8 +20,8 @@
   display: grid;
   overflow: hidden;
   grid-area: 3 / 1 / span 8 / span 4;
-  column-gap: 2px;
-  row-gap: 2px;
+  column-gap: 10px;
+  row-gap: 4px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(10, 1fr);
 }
@@ -53,7 +53,7 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  row-gap: 2px;
+  row-gap: 10px;
 }
 
 .match-graphs {
@@ -65,13 +65,12 @@
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 40px repeat(5, 1fr);
-  row-gap: 2px;
-  column-gap: 2px;
+  grid-template-rows: 45px repeat(5, 1fr);
   @include scoreboard;
 }
 
 .scoreboard-title {
+  border-bottom: 2px solid $scoreboard-border-color;
   .scoreboard-title-items {
     display: flex;
     @include scoreboard-title;
@@ -79,7 +78,8 @@
   .scoreboard-title-team-stat {
     display: flex;
     align-items: baseline;
-    margin-bottom: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     @include scoreboard-team-stat;
   }
 }
@@ -122,12 +122,14 @@
       grid-column-end: span 1;
       grid-row-start: $i + 1;
       grid-row-end: span 1;
+      background-color: #FFF1F1;
     }
     .other-team-#{$i} {
       grid-column-start: 2;
       grid-column-end: span 1;
       grid-row-start: $i + 1;
       grid-row-end: span 1;
+      background-color: #F1FAFF;
     }
   }
 }
