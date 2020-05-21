@@ -1,0 +1,49 @@
+$champion-spritesheet-size: 42px;
+$scoreboard-border-color: #ebeaea;
+$item-sprite-size: 28.8px;
+$item-sprite-empty-color: #E4E3E3;
+
+$scoreboard-individual-info-width: 135px;
+$cs-width: 50px;
+$scoreboard-individual-gold-width: 65px;
+
+$scoreboard-font-size: 0.8rem;
+
+@mixin scoreboard {
+  background-color: white;
+  border: 1px solid $scoreboard-border-color;
+}
+
+@mixin indivdual {
+  padding-left: 10px;
+  padding-right: 5px;
+  .champion {
+    border-radius: $champion-spritesheet-size / 2;
+    margin-right: 2px;
+  }
+  .scoreboard-summoner-spells {
+    margin-right: 2px;
+    div {
+      margin: 1px;
+    }
+  }
+  .scoreboard-individual-info {
+    width: $scoreboard-individual-info-width;
+    text-align: center;
+    font-size: $scoreboard-font-size;
+  }
+  .empty-item {
+    background-color: $item-sprite-empty-color;
+    width: $item-sprite-size;
+    height: $item-sprite-size;
+  }
+  .item-sprite {
+    border-radius: 3px;
+    margin-right: 2px;
+  }
+  .scoreboard-individual-cs {
+    text-align: center;
+    width: $cs-width;
+    font-size: $scoreboard-font-size;
+  }
+}

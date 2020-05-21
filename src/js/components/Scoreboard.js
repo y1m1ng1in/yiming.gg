@@ -17,7 +17,8 @@ const Scoreboard = ({ players }) => {
               deaths: p.deaths, 
               assists: p.assists, 
               cs: p.totalMinionsKilled,
-              name: p.name
+              name: p.name,
+              goldEarned: p.goldEarned,
             }}
             items={p.items}/>
         )

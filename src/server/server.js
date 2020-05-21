@@ -201,7 +201,11 @@ app.post('/more', function(req, res) {
     .all([
       ...gameIds
         .slice(indexStart, indexEnd)
-        .map(id => rp(matchData(id, server, apiKey), {json: true}))
+        .map(id => rp({
+          uri: matchData(id, server), 
+          headers: { 'X-Riot-Token': apiKey }, 
+          json: true
+        }))
     ])
     .then(values => {
       let data = {
