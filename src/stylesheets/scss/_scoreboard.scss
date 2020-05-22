@@ -14,10 +14,7 @@ $scoreboard-font-size: 0.8rem;
 
 $scoreboard-icon-size: 15px;
 
-@mixin scoreboard {
-  background-color: white;
-  border: 1px solid $scoreboard-border-color;
-}
+@import "utilities";
 
 @mixin indivdual {
   padding-left: 10px;

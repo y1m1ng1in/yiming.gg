@@ -1,5 +1,6 @@
 @import "matchList";
 @import "scoreboard";
+@import "matchGraphs";
 
 .app {
   display: grid;
@@ -58,6 +59,7 @@
 
 .match-graphs {
   grid-area: 1 / 1 / span 5 / span 1;
+  @include matchGraphs;
 }
 
 .scoreboard {
@@ -66,7 +68,7 @@
   overflow: hidden;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 45px repeat(5, 1fr);
-  @include scoreboard;
+  @include white-background-with-shadow;
 }
 
 .scoreboard-title {
@@ -142,7 +144,6 @@
 
 .summoner-general,
 .match-list,
-.match-graphs,
 .scoreboard-title-blue,
 .scoreboard-title-red{
   background-color: purple;

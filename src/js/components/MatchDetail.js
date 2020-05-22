@@ -1,7 +1,9 @@
 import React from "react";
-import Scoreboard from './Scoreboard'
+import Scoreboard from './Scoreboard';
+import MatchGraphs from './MatchGraphs';
 import '../../stylesheets/champion_spritesheet.css';
 import '../../stylesheets/style.css';
+import BarChart from "./BarChart";
 
 const MatchDetail = ({ matchData }) => {
   const scoreboardData = matchData => {
@@ -47,12 +49,7 @@ const MatchDetail = ({ matchData }) => {
 
   return (
     <div className="match-detail">
-      <div className="match-graphs">
-        champion id: {matchData.summonerStat.championId}<br />
-        {matchData.summonerStat.kills}/
-        {matchData.summonerStat.deaths}/
-        {matchData.summonerStat.assists}
-      </div>
+      <MatchGraphs />
       <Scoreboard players={scoreboardData(matchData)}/>
     </div>
   )

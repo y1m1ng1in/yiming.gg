@@ -1,0 +1,6 @@
+@import "scoreboard";
+
+@mixin matchGraphs {
+  background-color: white;
+  @include white-background-with-shadow;
+}

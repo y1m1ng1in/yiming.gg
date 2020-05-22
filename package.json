@@ -27,6 +27,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "d3": "^5.16.0",
     "express": "^4.17.1",
     "ignore-styles": "^5.0.1",
     "react": "^16.13.1",
