@@ -9,8 +9,8 @@ const MatchDetail = ({ matchData }) => {
   const scoreboardData = matchData => {
     const key = [
       'championId', 'champLevel', 'kills', 'deaths', 'assists', 'spell1Id', 
-      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned','perk0', 
-      'perkSubStyle', 'win', 'neutralMinionsKilled'
+      'spell2Id', 'teamId', 'totalMinionsKilled','goldEarned','perk0', 'visionScore',
+      'perkSubStyle', 'win', 'neutralMinionsKilled', 'totalDamageDealtToChampions'
     ];
     const itemKey = [
       'item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6'
@@ -43,14 +43,18 @@ const MatchDetail = ({ matchData }) => {
       otherTeamStat:    matchData.teamStat[otherTeamId],
       summonerWin:      summoner['win'], 
       summonerTeam:     summonerTeamPlayers, 
-      otherTeam:        otherTeamPlayers
+      otherTeam:        otherTeamPlayers,
+      summonerTeamId:   summonerTeamId,
+      otherTeamId:      otherTeamId
     };
   }
 
+  const data = scoreboardData(matchData);
+
   return (
     <div className="match-detail">
-      <MatchGraphs />
-      <Scoreboard players={scoreboardData(matchData)}/>
+      <MatchGraphs data={data} />
+      <Scoreboard players={data}/>
     </div>
   )
 }
