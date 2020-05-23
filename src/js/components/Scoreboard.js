@@ -42,11 +42,11 @@ const Scoreboard = ({ players }) => {
       }
       {
         players.summonerTeam.map((p, i) => 
-          makeIndividual(p, i, `summoner-team-${i+1}`))
+          makeIndividual(p, i, `summoner-team-${i+1} bg-team-${players.summonerTeamId}`))
       }
       {
         players.otherTeam.map((p, i) =>
-          makeIndividual(p, i, `other-team-${i+1}`))
+          makeIndividual(p, i, `other-team-${i+1} bg-team-${players.otherTeamId}`))
       }
     </section>
   )

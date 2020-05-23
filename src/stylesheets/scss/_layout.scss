@@ -124,15 +124,19 @@
       grid-column-end: span 1;
       grid-row-start: $i + 1;
       grid-row-end: span 1;
-      background-color: #FFF1F1;
     }
     .other-team-#{$i} {
       grid-column-start: 2;
       grid-column-end: span 1;
       grid-row-start: $i + 1;
       grid-row-end: span 1;
-      background-color: #F1FAFF;
     }
+  }
+  .bg-team-100 {
+    background-color: #F1FAFF;
+  }
+  .bg-team-200 {
+    background-color: #FFF1F1;
   }
 }
 
