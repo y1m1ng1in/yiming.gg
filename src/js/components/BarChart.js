@@ -40,7 +40,7 @@ const DashLine = ({ transformX, transformY, height, text }) => {
 
 const BarChart = ({ teamRed, teamBlue, type }) => {
   const margin = { top: 50, right: 0, bottom: 30, left: 40 };
-  const width  = 500;
+  const width  = 400;
   const height = 300;
   // let data = [[4000, 1], [2000, 2], [1000, 3], [5000, 4], [14243, 5]]; // simulate damage
   // let data2 = [[3424, 1], [12311, 2], [431, 3], [9883, 4], [5631, 5]];
@@ -99,7 +99,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
 
   return (
     <div className="barchart">
-      <svg height="300" width="500">
+      <svg height="300" width="400">
         <text fill="currentColor" x={margin.left} y={margin.top} fontSize="14">
           Damage Dealt to Champions
         </text>

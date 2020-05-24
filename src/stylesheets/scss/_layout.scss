@@ -59,6 +59,7 @@
 
 .match-graphs {
   grid-area: 1 / 1 / span 5 / span 1;
+  display: flex;
   @include matchGraphs;
 }
 

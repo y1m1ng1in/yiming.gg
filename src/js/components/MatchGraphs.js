@@ -1,5 +1,6 @@
 import React from "react";
 import BarChart from "./BarChart";
+import PieChart from "./PieChart";
 
 const MatchGraphs = ({ data }) => {
   const getValues = teamPlayers => {
@@ -28,6 +29,7 @@ const MatchGraphs = ({ data }) => {
   return (
     <div className="match-graphs">
       <BarChart teamRed={teamData[200].damage} teamBlue={teamData[100].damage} />
+      <PieChart teamRed={teamData[200].damage} teamBlue={teamData[100].damage} />
     </div>
   )
 }
