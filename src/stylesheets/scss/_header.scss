@@ -1,0 +1,45 @@
+$label-height: 12px;
+$component-height: 40px;
+$select-width: 50px;
+
+.header {
+  position: relative;
+  .logo {
+    width: 100px;
+    font-size: 1.8rem;
+    top: 8px;
+    position: absolute;
+    left: 100px;
+  }
+  .search-form {
+    border: none;
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+      legend {
+        font-size: 0.6rem;
+      }
+      select {
+        height: $component-height;
+        width: $select-width;
+        font-family: inherit;
+      }
+    }
+    input {
+      height: $component-height;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    button {
+      height: $component-height;
+      background-color: white;
+      font-family: inherit;
+    }
+    label[for="player-name"] {
+      font-size: 0.6rem;
+      height: $label-height;
+    }
+  }
+  @include white-background-with-shadow;
+}
