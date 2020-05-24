@@ -16,9 +16,12 @@ $scoreboard-icon-size: 15px;
 
 @import "utilities";
 
-@mixin individual {
+@mixin individual-leftmost-padding {
   padding-left: 10px;
   padding-right: 5px;
+}
+
+@mixin individual {
   .champion-sprite-container .champion.sprite {
     border-radius: $champion-spritesheet-size / 2;
   }
@@ -44,61 +47,49 @@ $scoreboard-icon-size: 15px;
   .scoreboard-individual-cs {
     font-size: $scoreboard-font-size;
   }
-}
-
-@mixin scoreboard-icon {
-  display: inline-block;
-  width: $scoreboard-icon-size;
-  height: $scoreboard-icon-size;
-  background-size: $scoreboard-icon-size $scoreboard-icon-size;
+  margin: auto;
+  // @include individual-leftmost-padding;
 }
 
 @mixin scoreboard-title {
   font-size: 0.7rem;
   .scoreboard-title-champion {
-    width: $champion-spritesheet-size + $summoner-spell-sprite-size + $summoner-perk-sprite-size;
     text-align: center;
   }
   .scoreboard-title-kda {
-    width: $scoreboard-individual-info-width + 15px;
     text-align: center;
   }
   .scoreboard-title-item {
-    width: $item-sprite-size * 7 + 6 * 2px;
     text-align: center;
   }
   .scoreboard-title-cs {
-    width: $cs-width;
     text-align: center;
   }
+  margin: auto;
+  // @include individual-leftmost-padding;
 }
 
-@mixin scoreboard-team-stat-item-margin {
-  margin-left: 30px;
-  margin-right: 30px;
+@mixin scoreboard-icon {
+  height: $scoreboard-icon-size;
+  background-size: $scoreboard-icon-size $scoreboard-icon-size;
+  background-repeat: no-repeat;
+  padding-left: $scoreboard-icon-size;
+  margin: auto;
 }
 
 @mixin scoreboard-team-stat {
   font-size: 0.7rem;
-  .scoreboard-title-tower {
-    .tower-icon {
-      background: url('../data/tower.svg');
-      @include scoreboard-icon;
-    }
-    @include scoreboard-team-stat-item-margin;
+  .tower-icon {
+    background: url('../data/tower.svg');
+    @include scoreboard-icon;
   }
-  .scoreboard-title-dragon {
-    .dragon-icon {
-      background: url('../data/dragon.svg');
-      @include scoreboard-icon;
-    }
-    @include scoreboard-team-stat-item-margin;
+  .dragon-icon {
+    background: url('../data/dragon.svg');
+    @include scoreboard-icon;
   }
-  .scoreboard-title-baron {
-    .baron-icon {
-      background: url('../data/baron.svg');
-      @include scoreboard-icon;
-    }
-    @include scoreboard-team-stat-item-margin;
+  .baron-icon {
+    background: url('../data/baron.svg');
+    @include scoreboard-icon;
   }
+  @include individual-leftmost-padding;
 }

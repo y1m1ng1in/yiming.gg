@@ -15,13 +15,13 @@
 }
 
 .search-form {
-  grid-area: 1 / 4 / span 2 / span 1;
+  grid-area: 1 / 4 / span 1 / span 1;
 }
 
 .summoner-overall {
   display: grid;
   overflow: hidden;
-  grid-area: 3 / 1 / span 8 / span 4;
+  grid-area: 2 / 1 / span 9 / span 4;
   column-gap: 10px;
   row-gap: 4px;
   grid-template-columns: repeat(4, 1fr);
@@ -73,19 +73,42 @@
   @include white-background-with-shadow;
 }
 
+$sb-champion-width: 45px;
+$sb-summoner-width: 24.4px;
+$sb-perk-width: 32px;
+$sb-name-width: 135px;
+$sb-item-width: 28.79px;
+$sb-cs-width: 70px;
+
 .scoreboard-title {
   border-bottom: 2px solid $scoreboard-border-color;
-  .scoreboard-title-items {
-    display: flex;
-    @include scoreboard-title;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 
+    $sb-champion-width+$sb-summoner-width+$sb-perk-width $sb-name-width $sb-item-width*7 + 6px $sb-cs-width;
+  .tower-icon {
+    grid-area: 1 / 1 / span 1 / span 1;
   }
-  .scoreboard-title-team-stat {
-    display: flex;
-    align-items: baseline;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    @include scoreboard-team-stat;
+  .dragon-icon {
+    grid-area: 1 / 2 / span 1 / span 1;
   }
+  .baron-icon {
+    grid-area: 1 / 3 / span 1 / span 1;
+  }
+  .scoreboard-title-champion {
+    grid-area: 2 / 1 / span 1 / span 1;
+  }
+  .scoreboard-title-kda {
+    grid-area: 2 / 2 / span 1 / span 1;
+  }
+  .scoreboard-title-item {
+    grid-area: 2 / 3 / span 1 / span 1;
+  }
+  .scoreboard-title-cs {
+    grid-area: 2 / 4 / span 1 / span 1;
+  }
+  @include scoreboard-team-stat;
+  @include scoreboard-title;
 }
 
 .individual {
@@ -144,12 +167,12 @@
       grid-row-end: span 1;
     }
   }
-  .bg-team-100 {
-    background-color: #F1FAFF;
-  }
-  .bg-team-200 {
-    background-color: #FFF1F1;
-  }
+  // .bg-team-100 {
+  //   background-color: #F1FAFF;
+  // }
+  // .bg-team-200 {
+  //   background-color: #FFF1F1;
+  // }
 }
 
 @include scoreboard-grid-area;

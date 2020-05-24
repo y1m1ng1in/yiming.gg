@@ -38,7 +38,7 @@ const PieChart = ({ teamRed, teamBlue, type }) => {
 
   return (
     <div className="pie-chart">
-      <svg width= "500" height="300">
+      <svg width= "400" height="300">
         <Pie 
           data={teamRed} 
           radius={80} 

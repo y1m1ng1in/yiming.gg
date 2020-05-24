@@ -1,30 +1,32 @@
 import React from "react";
 
-const ScoreboardTitle = ({ win, baron, tower, dragon, riftHerald }) => {
+const ScoreboardTower = ({ tower }) => 
+  <div className="tower-icon scoreboard-title-icon">
+    tower: {tower}
+  </div>
+
+const ScoreboardDragon = ({ dragon }) => 
+  <div className="dragon-icon scoreboard-title-icon">
+    dragon: {dragon}
+  </div>
+
+const ScoreboardBaron = ({ baron, riftHerald }) =>
+  <div className="baron-icon scoreboard-title-baron">
+    rift herald/baron: {baron}/{riftHerald}
+  </div>
+
+const ScoreboardTitle = ({ win, baron, tower, dragon, riftHerald, order }) => {
   return (
     <div className={
       win ? "scoreboard-title-win scoreboard-title" : "scoreboard-title-lose scoreboard-title"
     }>
-      <div className="scoreboard-title-team-stat">
-        <div className="scoreboard-title-tower">
-          <div className="tower-icon"></div>
-          tower: {tower} 
-        </div>
-        <div className="scoreboard-title-dragon">
-          <div className="dragon-icon"></div>
-          dragon: {dragon} 
-        </div>
-        <div className="scoreboard-title-baron">
-          <div className="baron-icon"></div>
-          rift herald/baron: {baron}/{riftHerald}
-        </div>
-      </div>
-      <div className="scoreboard-title-items">
-        <div className="scoreboard-title-champion">champion</div>
-        <div className="scoreboard-title-kda">kda</div>
-        <div className="scoreboard-title-item">Item</div>
-        <div className="scoreboard-title-cs">cs/gold</div>
-      </div>
+      <ScoreboardTower tower={tower} />
+      <ScoreboardDragon dragon={dragon} />
+      <ScoreboardBaron baron={baron} riftHerald={riftHerald} />
+      <div className="scoreboard-title-champion">champion</div>
+      <div className="scoreboard-title-kda">kda</div>
+      <div className="scoreboard-title-item">Item</div>
+      <div className="scoreboard-title-cs">cs/gold</div>
     </div>
   )
 }
