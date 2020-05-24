@@ -1,20 +1,40 @@
 @import "scoreboard";
+@import "utilities";
 
 @media (max-width: 1388px) and (min-width: 1024px) {
-  .indivdual {
-    .individual-info-and-items {
-      height: $item-sprite-size * 2 + 20px;
-      grid-template-columns: $scoreboard-individual-kda-width repeat(4, $item-sprite-size);
-      grid-template-rows: 20px repeat(2, 1fr);
-      .individual-name {
-        grid-area: 1 / 2 / span 1 / span 4;
+  .individual {
+    grid-template-columns: 45px 24.4px 32px 70px repeat(4, 28.79px) 70px;
+    .champion-sprite-container {
+      grid-area: 2 / 1 / span 2 / span 1;
+    }
+    .scoreboard-summoner-spells {
+      grid-area: 2 / 2 / span 2 / span 1;
+    }
+    .scoreboard-perk-runes {
+      grid-area: 2 / 3 / span 2 / span 1;
+    }
+    .individual-name {
+      grid-area: 1 / 5 / span 1 / span 4;
+      align-items: flex-end;
+    }
+    @for $i from 0 through 3 {
+      .item-index-#{$i} {
+        grid-column-start: $i+5;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 1;
       }
-      .individual-kda {
-        grid-area: 1 / 1 / span 3 / span 1;
+    }
+    @for $i from 0 through 2 {
+      .item-index-#{$i+4} {
+        grid-column-start: $i+5;
+        grid-column-end: span 1;
+        grid-row-start: 3;
+        grid-row-end: span 1;
       }
-      .item-sprite {
-        grid-row: span 1;
-      }
+    }
+    .scoreboard-individual-cs {
+      grid-area: 2 / 9 / span 2 / span 1;
     }
   }
   

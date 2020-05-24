@@ -2,3 +2,10 @@
   background-color: white;
   box-shadow: 2px 2px 5px #888888;
 }
+
+@mixin flexbox-centering($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}

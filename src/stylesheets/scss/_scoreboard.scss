@@ -16,24 +16,22 @@ $scoreboard-icon-size: 15px;
 
 @import "utilities";
 
-@mixin indivdual {
+@mixin individual {
   padding-left: 10px;
   padding-right: 5px;
-  .champion {
+  .champion-sprite-container .champion.sprite {
     border-radius: $champion-spritesheet-size / 2;
-    margin-right: 2px;
   }
   .scoreboard-summoner-spells {
-    margin-right: 2px;
     div {
       margin: 1px;
     }
   }
-  .individual-info-and-items {
-    div {
-      text-align: center;
-      font-size: $scoreboard-font-size;
-    }
+  .individual-name {
+    font-size: $scoreboard-font-size - 0.1rem;
+  }
+  .individual-kda {
+    font-size: $scoreboard-font-size + 0.1rem;
   }
   .empty-item {
     background-color: $item-sprite-empty-color;
@@ -44,8 +42,6 @@ $scoreboard-icon-size: 15px;
     border-radius: 3px;
   }
   .scoreboard-individual-cs {
-    text-align: center;
-    width: $cs-width;
     font-size: $scoreboard-font-size;
   }
 }
