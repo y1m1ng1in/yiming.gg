@@ -3,6 +3,10 @@
 
 @media (max-width: 1388px) and (min-width: 1024px) {
   $sb-kda-width: 70px;
+  
+  .app {
+    grid-template-rows: 54px repeat(4, 75px) repeat(5, 85px);
+  }
 
   .scoreboard-title {
     border-bottom: 2px solid $scoreboard-border-color;
@@ -30,6 +34,7 @@
     .individual-name {
       grid-area: 1 / 5 / span 1 / span 4;
       align-items: flex-end;
+      padding-bottom: 3px;
     }
     @for $i from 0 through 3 {
       .item-index-#{$i} {
@@ -53,10 +58,11 @@
   }
   
   .match-graphs {
-    grid-area: 1 / 1 / span 3 / span 1;
+    grid-area: 1 / 1 / span 4 / span 1;
   }
 
   .scoreboard {
-    grid-area: 4 / 1 / span 7 / span 1;
+    grid-area: 5 / 1 / span 6 / span 1;
+    grid-template-rows: 45px repeat(5, 85px);
   }  
 }

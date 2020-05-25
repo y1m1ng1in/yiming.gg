@@ -1,6 +1,6 @@
 @mixin white-background-with-shadow {
   background-color: white;
-  box-shadow: 2px 2px 5px #888888;
+  box-shadow: 7px 7px 5px -1px rgba(94,89,89,0.38);
 }
 
 @mixin flexbox-centering($direction: row) {

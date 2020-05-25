@@ -4,15 +4,21 @@
 @import "utilities";
 @import "header";
 
+$app-base-row-height: 75px;
+$app-scoreboard-1024-height: 85px;
+
+$scoreboard-1388-height: 65px;
+
 .app {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: $component-height + $label-height + 2px repeat(9, 1fr);
+  grid-template-rows: $component-height + $label-height + 2px repeat(9, 75px);
   column-gap: 2px;
   row-gap: 10px;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  // height: 100vh;
+  // width: 100vw;
+  // overflow: hidden;
+  overflow-x: hidden;
 }
 
 .header {
@@ -68,6 +74,7 @@
     margin: 0;
   }
   @include match-list;
+  @include white-background-with-shadow;
 }
 
 .match-detail {
@@ -90,7 +97,7 @@
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 45px repeat(5, 1fr);
+  grid-template-rows: 45px repeat(5, 65px);
   @include white-background-with-shadow;
 }
 
