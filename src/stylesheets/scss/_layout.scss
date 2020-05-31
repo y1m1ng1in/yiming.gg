@@ -92,21 +92,28 @@ $scoreboard-1388-height: 65px;
   grid-template-columns: 200px repeat(2, 400px);
   .graph-control-panel {
     grid-area: 1 / 1 / span 1 / span 1;
-    display: grid;
-    grid-template-rows: repeat(8, 35px);
-    grid-template-columns: 1fr;
-    .graph-control-panel-item {
-      display: flex;
+    .graph-control-panel-fixed,
+    .graph-control-panel-togglable {
+      display: grid;
+      height: 100%;
+      grid-template-rows: repeat(9, 35px);
+      grid-template-columns: 1fr;
+      .graph-control-panel-item {
+        display: flex;
+      }
+      button.graph-control-panel-item {
+        justify-content: center;
+        align-items: center;
+      }
+      h3.graph-control-panel-item {
+        justify-content: start;
+        align-items: center;
+      }
+      @include graph-control-panel;
     }
-    button.graph-control-panel-item {
-      justify-content: center;
-      align-items: center;
+    .graph-control-panel-togglable {
+      display: none;
     }
-    h3.graph-control-panel-item {
-      justify-content: start;
-      align-items: center;
-    }
-    @include graph-control-panel;
   }
   .barchart {
     grid-area: 1 / 2 / span 1 / span 1;

@@ -5,14 +5,61 @@
   @include white-background-with-shadow;
 }
 
+@mixin button-setting {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: white;
+}
+
+$button-hover-bg-color: #f8f9fa;
+$select-indicator-color: #00b4d8;
+
 @mixin graph-control-panel {
   box-shadow: 5px 0px 5px 0px rgba(208, 208, 208, 0.59);
+  overflow: hidden;
   .graph-control-panel-item {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: white;
+    @include button-setting;
+  }
+  .graph-control-panel-item.first-line-toggle {
+    .back {
+      @include button-setting;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-right: 5px;
+      border-radius: 5px;
+    }
+    .control-panel-toggle {
+      width: 35px;
+      height: 35px;
+      border-radius: 17.5px;
+      @include button-setting;
+    }
+    .back > * {
+      pointer-events: none;
+    }
+    .control-panel-toggle > * {
+      pointer-events: none;
+    }
+    .control-panel-toggle.hidden {
+      display: none;
+    }
+    .back:hover {
+      background-color: $button-hover-bg-color;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .control-panel-toggle:hover {
+      background-color: $button-hover-bg-color;
+      cursor: pointer;
+    }
+    .back:focus {
+      outline: none;
+    }
+    .control-panel-toggle:hover {
+      outline: none;
+    }
   }
   button.graph-control-panel-item {
     font-size: 0.8rem;
@@ -22,8 +69,8 @@
     font-size: 0.9rem;
   }
   button.graph-control-panel-item:hover {
-    background-color: #f8f9fa;
-    color: #00b4d8;
+    background-color: $button-hover-bg-color;
+    color: $select-indicator-color;
     font-weight: bolder;
     cursor: pointer;
   }
@@ -31,10 +78,10 @@
     outline: none;
   }
   button.graph-control-panel-item.selected {
-    border-left: 3px solid #00b4d8;
+    border-left: 3px solid $select-indicator-color;
   }
   button.graph-control-panel-item.selected.chosed {
-    background-color: #f8f9fa;
-    color: #00b4d8;
+    background-color: $button-hover-bg-color;
+    color: $select-indicator-color;
   }
 }
