@@ -148,7 +148,15 @@ app.post('/search', function(req, res) {
     .then(value => {
       console.log(value);
       state = { ...value, server: server }
-      initStore = { hasSearchedSummoner: true, ...value, server: server };
+      initStore = { 
+        hasSearchedSummoner: true, 
+        server: server,
+        graphDisplay: {
+          view: 'damage',
+          mode: 'individual'
+        },
+        ...value   
+      };
       return rp({
         uri: matchList(state.accountId, state.server), 
         headers: { 'X-Riot-Token': apiKey },

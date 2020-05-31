@@ -5,9 +5,11 @@ import MatchOverview from "../components/MatchOverview";
 import Summoner from "../components/Summoner";
 import MatchList from "../components/MatchList";
 import MatchDetail from "../components/MatchDetail";
+import GraphController from "../components/GraphController";
 import { 
-  getSummonerInfo, getMatchDetail, getMoreMatchStats 
+  getSummonerInfo, getMatchDetail, getMoreMatchStats, changeGraphDisplay 
 } from "../../actions";
+import MatchGraphs from './MatchGraphs';
 
 export const SummonerSearch = connect(
   null, 
@@ -81,6 +83,7 @@ export const MatchListItem = connect(
     onSelect(indexOfMatchList) {
       console.log(indexOfMatchList, "match selected in container.js");
       dispatch(getMatchDetail(indexOfMatchList));
+      dispatch(changeGraphDisplay({ mode: 'individual', view: 'damage' }))
     }
   })
 )(MatchOverview)
@@ -108,8 +111,25 @@ export const SummonerData = connect(
 )(Summoner)
 
 export const MatchDetailContainer = connect(
-  state => {
-    return { matchData: state.matchStats[state.indexOfMatchListSelected] };
-  },
+  state => ({
+     matchData: state.matchStats[state.indexOfMatchListSelected] 
+  }),
   null
 )(MatchDetail)
+
+export const MatchGraphContainer = connect(
+  (state, ownProps) => ({
+    display: state.graphDisplay,
+    data: ownProps.data
+  }),
+  null
+)(MatchGraphs)
+
+export const MatchGraphController = connect(
+  state => ({ display: state.graphDisplay }),
+  dispatch => ({
+    onSelect(selection) {
+      dispatch(changeGraphDisplay(selection))
+    }
+  })
+)(GraphController)

@@ -10,7 +10,13 @@ export const getMatchDetail = index => ({
   type: "get_match_detail"
 });
 
-export const getMoreMatchStats= matches => ({
+export const getMoreMatchStats = matches => ({
   matchStats: matches,
   type: "get_more_match_stats"
+});
+
+export const changeGraphDisplay = display => ({
+  mode: display.mode,
+  view: display.view,
+  type: "change_graph_display"
 });

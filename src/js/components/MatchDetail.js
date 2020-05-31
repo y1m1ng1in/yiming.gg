@@ -1,6 +1,6 @@
 import React from "react";
 import Scoreboard from './Scoreboard';
-import MatchGraphs from './MatchGraphs';
+import { MatchGraphContainer } from './container';
 import '../../stylesheets/style.css';
 import BarChart from "./BarChart";
 
@@ -52,7 +52,7 @@ const MatchDetail = ({ matchData }) => {
 
   return (
     <div className="match-detail">
-      <MatchGraphs data={data} />
+      <MatchGraphContainer data={data} />
       <Scoreboard players={data}/>
     </div>
   )

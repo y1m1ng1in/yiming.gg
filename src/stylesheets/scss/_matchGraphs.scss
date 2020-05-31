@@ -4,3 +4,37 @@
   background-color: white;
   @include white-background-with-shadow;
 }
+
+@mixin graph-control-panel {
+  box-shadow: 5px 0px 5px 0px rgba(208, 208, 208, 0.59);
+  .graph-control-panel-item {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: white;
+  }
+  button.graph-control-panel-item {
+    font-size: 0.8rem;
+  }
+  h3.graph-control-panel-item {
+    padding-left: 10px;
+    font-size: 0.9rem;
+  }
+  button.graph-control-panel-item:hover {
+    background-color: #f8f9fa;
+    color: #00b4d8;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  button.graph-control-panel-item:focus {
+    outline: none;
+  }
+  button.graph-control-panel-item.selected {
+    border-left: 3px solid #00b4d8;
+  }
+  button.graph-control-panel-item.selected.chosed {
+    background-color: #f8f9fa;
+    color: #00b4d8;
+  }
+}

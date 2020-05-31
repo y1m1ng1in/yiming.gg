@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import { 
   indexOfMatchListSelected, constantKeyReducers, hasSearchedSummoner,
-  startIndex, endIndex, matchList, matchStats
+  startIndex, endIndex, matchList, matchStats, graphDisplay
 } from "./reducers";
 
 const storeFactory = (initialState={}) => 
@@ -13,6 +13,7 @@ const storeFactory = (initialState={}) =>
       endIndex,
       matchList, 
       matchStats,
+      graphDisplay,
       ...constantKeyReducers
     }), 
     initialState

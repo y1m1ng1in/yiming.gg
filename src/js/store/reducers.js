@@ -43,4 +43,12 @@ export const matchStats = (state=[], action) => {
     return state;
   }
 }
+
+export const graphDisplay = (state={}, action) => {
+  if(action.type === "change_graph_display") {
+    return { mode: action.mode, view: action.view };
+  } else {
+    return state;
+  }
+}
  
