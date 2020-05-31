@@ -66,3 +66,79 @@
     grid-template-rows: 45px repeat(5, 85px);
   }  
 }
+
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .app {
+    grid-template-rows: 54px repeat(14, 75px);
+  }
+
+  .summoner-overall {
+    grid-area: 2 / 1 / span 14 / span 4;
+    grid-template-rows: repeat(15, 1fr);
+  }
+
+  .match-detail {
+    grid-area: 1 / 2 / span 15 / span 3;
+    grid-template-rows: repeat(15, 1fr);
+  }
+
+  .scoreboard {
+    grid-area: 6 / 1 / span 10 / span 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: 45px repeat(5, 65px) 45px repeat(5, 65px);
+  }
+
+  @for $i from 1 through 5 {
+    .summoner-team-#{$i} {
+      grid-column-start: 1;
+      grid-column-end: span 1;
+      grid-row-start: $i + 1;
+      grid-row-end: span 1;
+    }
+    .other-team-#{$i} {
+      grid-column-start: 1;
+      grid-column-end: span 1;
+      grid-row-start: $i + 7;
+      grid-row-end: span 1;
+    }
+  }
+
+  @mixin match-list-icon-768 {
+    width: $match-list-icon-size * 0.75;
+    height: $match-list-icon-size * 0.75;
+    background-size: $match-list-icon-size * 0.75 $match-list-icon-size * 0.75;
+  }
+
+  .match-list {
+    ul {
+      li {
+        .match-list-item-result {
+          font-size: 0.9rem;
+          .match-list-item-icons {
+            .most-kill {
+              @include match-list-icon-768;
+            }
+            .most-gold {
+              @include match-list-icon-768;
+            }
+            .most-damage-dealt {
+              @include match-list-icon-768;
+            }
+            .most-damage-taken {
+              @include match-list-icon-768;
+            }
+          }
+        }
+        .match-list-item-meta {
+          flex-basis: 35%;
+          font-size: 0.6rem;
+          .meta-info {
+            text-align: center;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
+}

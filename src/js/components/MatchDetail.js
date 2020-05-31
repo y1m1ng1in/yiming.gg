@@ -1,7 +1,6 @@
 import React from "react";
 import Scoreboard from './Scoreboard';
 import MatchGraphs from './MatchGraphs';
-import '../../stylesheets/champion_spritesheet.css';
 import '../../stylesheets/style.css';
 import BarChart from "./BarChart";
 
