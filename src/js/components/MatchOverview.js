@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import '../../stylesheets/style.css';
 import '../../stylesheets/champion_spritesheet_60.css';
 
@@ -20,10 +20,37 @@ const printDate = timestamp => {
 }
 
 const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=f=>f }) => {
+  useEffect(() => {
+    let mql = window.matchMedia('(min-width: 768px)');
+    mql.addEventListener("change", e => {
+      if(e.matches) {
+        document.querySelector(".match-detail").style.display = "grid";
+        document.querySelector(".summoner-general").style.display = "block";
+        document.querySelector(".match-list").style.display = "block";
+      } else {
+        document.querySelector(".match-detail").style.display = "none";
+        document.querySelector(".summoner-general").style.display = "block";
+        document.querySelector(".match-list").style.display = "block";
+      }
+    });
+  })  
+
   const select = () => {
     console.log("selected", index);
     console.log("win?", matchInfo.win);
     onSelect(index);
+    let detail       = document.querySelector(".match-detail");
+    let summonerInfo = document.querySelector(".summoner-general");
+    let matchList    = document.querySelector(".match-list");
+    let isHidden = window.getComputedStyle(detail).getPropertyValue("display");
+    if(isHidden === "none") {
+      console.log(detail.style.display)
+      detail.style.display = "grid";
+      summonerInfo.style.display = "none";
+      matchList.style.display = "none";
+    } else {
+      console.log(detail)
+    }
   }
 
   return (

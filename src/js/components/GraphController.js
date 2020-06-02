@@ -29,6 +29,19 @@ const GraphController = ({ display, onSelect }) => {
     }
   }
 
+  const toggleView = () => {
+    let detail       = document.querySelector(".match-detail");
+    let summonerInfo = document.querySelector(".summoner-general");
+    let matchList    = document.querySelector(".match-list");
+    let isHiddenSummoner  = window.getComputedStyle(summonerInfo).getPropertyValue("display");
+    let isHiddenMatchList = window.getComputedStyle(matchList).getPropertyValue("display");
+    if(isHiddenSummoner === "none" && isHiddenMatchList === "none") {
+      summonerInfo.style.display = "block";
+      matchList.style.display = "block";
+      detail.style.display = "none";
+    }
+  }
+
   let mode = display.mode;
   let view = display.view;
 
@@ -56,7 +69,7 @@ const GraphController = ({ display, onSelect }) => {
   const elemetTogglable = () => 
     <div className="graph-control-panel-togglable">      
       <div className="graph-control-panel-item first-line-toggle">
-        <button className="back">
+        <button className="back" onClick={toggleView}>
           <FontAwesomeIcon icon={faArrowLeft} />&nbsp;matchlist
         </button>
         <button onClick={toggle} id="down" className="control-panel-toggle">
