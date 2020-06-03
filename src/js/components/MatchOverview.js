@@ -25,11 +25,11 @@ const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=
     mql.addEventListener("change", e => {
       if(e.matches) {
         document.querySelector(".match-detail").style.display = "grid";
-        document.querySelector(".summoner-general").style.display = "block";
+        document.querySelector(".summoner-general").style.display = "grid";
         document.querySelector(".match-list").style.display = "block";
       } else {
         document.querySelector(".match-detail").style.display = "none";
-        document.querySelector(".summoner-general").style.display = "block";
+        document.querySelector(".summoner-general").style.display = "grid";
         document.querySelector(".match-list").style.display = "block";
       }
     });

@@ -1,5 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
+import "../../stylesheets/champion_spritesheet_15.css";
 
 const Bar = ({ transformX, transformY, width, height, color, text }) => {
   return (
@@ -39,7 +40,7 @@ const DashLine = ({ transformX, transformY, height, text }) => {
 }
 
 const BarChart = ({ teamRed, teamBlue, type }) => {
-  const margin = { top: 50, right: 0, bottom: 30, left: 40 };
+  const margin = { top: 50, right: 30, bottom: 30, left: 5 };
   const width  = 600;
   const height = 300;
   let data = teamBlue;
@@ -50,20 +51,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
       .domain([0, d3.max([...data, ...data2], d => d[0])])
       .range([margin.left, width - margin.right - margin.left]);
 
-  let y = d3.scaleBand()
-      .domain(yDomain)
-      .rangeRound([margin.top + 10, (height - margin.bottom) / 2 + 10])
-      .padding(0.1);
-
   let ticks = d3.ticks(0, d3.max([...data, ...data2], d => d[0]), 5);
-
-  let y2 = d3.scaleBand()
-      .domain(yDomain)
-      .rangeRound([
-        (height - margin.bottom) / 2 + 20, 
-        (height - margin.bottom) / 2 - 20 + (height - margin.bottom) / 2 
-      ])
-      .padding(0.1);
 
   let yTeam = d3.scaleBand()
         .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -79,6 +67,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
   const extract = (d, k) => d.map(i => i[k]);
 
   const printTeamBar = (data1, data2, yScale, color1, color2) => {
+    console.log(data1, data2)
     let data = [...extract(data1, 0), ...extract(data2, 0)];
     let index = [1, 2, 3, 4, 5, 6 ,7 ,8, 9, 10]
     data = d3.zip(data, index);
@@ -95,6 +84,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
   }
       
   const printComparsionBar = (data1, data2, yScale, color1, color2) => {
+    console.log(data1, data2)
     let data = d3.zip(extract(data1, 0), extract(data2, 0), yDomain, yDomain);
     return data.map((d, i) =>
       <BarComparsion 
@@ -107,9 +97,42 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
         text={[d[0], d[1]]}/>)
   }
 
+  const printLabelSprite = (data1, data2, type) => {
+    if(type === "individual") {
+      return (
+        <div className="barchart-label">
+          {
+            data1.map((d, i) => 
+              <div key={i} className={`champion-label champion-label-${2 * i + 1} champion-15-${d[1]}`}></div>)
+          }
+          {
+            data2.map((d, i) => 
+              <div key={i} className={`champion-label champion-label-${2 * i + 2} champion-15-${d[1]}`}></div>)
+          }
+        </div>
+      );
+    } else {
+      return (
+        <div className="barchart-label">
+          {
+            data1.map((d, i) => 
+              <div key={i} className={`champion-label champion-label-${i+1} champion-15-${d[1]}`}></div>)
+          }
+          {
+            data2.map((d, i) => 
+              <div key={i} className={`champion-label champion-label-${i+6} champion-15-${d[1]}`}></div>)
+          }
+        </div>
+      );
+    }
+  }
+
 
   return (
     <div className="barchart">
+      <div className="barchart-label">
+        { printLabelSprite(data, data2, type) }
+      </div>
       <div className="barchart-container">
         <svg height="300" width="600">
           <text fill="currentColor" x={margin.left} y={margin.top} fontSize="14">

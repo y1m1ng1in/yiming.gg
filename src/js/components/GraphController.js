@@ -36,7 +36,7 @@ const GraphController = ({ display, onSelect }) => {
     let isHiddenSummoner  = window.getComputedStyle(summonerInfo).getPropertyValue("display");
     let isHiddenMatchList = window.getComputedStyle(matchList).getPropertyValue("display");
     if(isHiddenSummoner === "none" && isHiddenMatchList === "none") {
-      summonerInfo.style.display = "block";
+      summonerInfo.style.display = "grid";
       matchList.style.display = "block";
       detail.style.display = "none";
     }

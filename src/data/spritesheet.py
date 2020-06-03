@@ -58,6 +58,15 @@ def gen_icon_image_list():
   key = ['bear', 'damage', 'gold', 'kill']
   return zip(key, image_names)
 
+def gen_rank_list():
+  image_names = [
+    'Emblem_Bronze.png', 'Emblem_Challenger.png', 'Emblem_Diamond.png',
+    'Emblem_Gold.png', 'Emblem_grandmaster.png', 'Emblem_Iron.png',
+    'Emblem_Master.png', 'Emblem_Platinum.png', 'Emblem_Silver.png',
+  ]
+  key = ['BRONZE', 'CHALLENGER','DIAMOND','GOLD','GRANDMASTER','IRON',
+    'MASTER','PLATINUM','SILVER']
+  return zip(key, image_names)
 
 def gen_perk_image_list(rune):
   image_list = []
@@ -163,6 +172,7 @@ def main():
   match_icon_list     = gen_icon_image_list()
   perk_image_list     = gen_perk_image_list(False)
   rune_image_list     = gen_perk_image_list(True)
+  rank_image_list     = gen_rank_list()
 
   parser = argparse.ArgumentParser(
     description='Generate spritesheets and corresponding css files')
@@ -190,6 +200,10 @@ def main():
   parser.add_argument(
     '--rune-css', type=str, default="rune_spritesheet.css",
     help="the name of the output css for rune spritesheet")
+
+  parser.add_argument(
+    '--rank-css', type=str, default="rank_spritesheet.css",
+    help="the name of the output css for rank spritesheet")
 
   parser.add_argument(
     '--prefix', '-p', type=str, default="",
@@ -224,6 +238,9 @@ def main():
   parser.add_argument(
     '--exclude-perk', action="store_true",
     help="do not generate perk")
+  
+  parser.add_argument(
+    '--exclude-rank', action="store_true")
 
   parser.add_argument(
     '--responsive-768', type=float, default=1.0,
@@ -237,6 +254,7 @@ def main():
   match_icon_css = '../stylesheets/' + args.match_icon_css
   perk_css       = '../stylesheets/' + args.perk_css
   rune_css       = '../stylesheets/' + args.rune_css 
+  rank_css       = '../stylesheets/' + args.rank_css
   
   champion_css_prefix   = '.champion-' + args.prefix + '-'
   item_css_prefix       = '.item-' + args.prefix + '-'
@@ -244,6 +262,7 @@ def main():
   match_icon_css_prefix = '.match-icon-' + args.prefix + '-'
   perk_css_prefix       = '.perk-' + args.prefix + '-'
   rune_css_prefix       = '.rune-' + args.prefix + '-'
+  rank_css_prefix       = '.rank-' + args.prefix + '-'
 
   exclude_champion   = args.exclude_champion
   exclude_item       = args.exclude_item
@@ -251,6 +270,7 @@ def main():
   exclude_match_icon = args.exclude_match_icon
   exclude_perk       = args.exclude_perk
   exclude_rune       = args.exclude_rune
+  exclude_rank       = args.exclude_rank
   responsive_768     = args.responsive_768
 
   percentage = args.size
@@ -290,6 +310,12 @@ def main():
       10, '../../resources/', perk_image_list, 'perk_spritesheet.png',
       perk_css, perk_css_prefix, '../data/perk_spritesheet.png',
       (32, 32), size_percentage=percentage, responsive_768=responsive_768)
+
+  if not exclude_rank:
+    gen_spritesheet(
+      10, '../../resources/rank/', rank_image_list, 'rank_spritesheet.png',
+      rank_css, rank_css_prefix, '../data/rank_spritesheet.png',
+      (512, 585), size_percentage=percentage, responsive_768=responsive_768)
 
 
 if __name__ == '__main__':

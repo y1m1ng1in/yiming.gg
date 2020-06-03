@@ -54,6 +54,30 @@ $scoreboard-1388-height: 65px;
 
 .summoner-general {
   grid-area: 1 / 1 / span 2 / span 1;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: 1fr;
+  @include white-background-with-shadow;
+  .name-level {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #summoner-name {
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    #level {
+      font-size: 0.7rem;
+      font-weight: lighter;
+    }
+    #tier-rank {
+      font-weight: bold;
+    }
+  }
+  .rank-logo {
+    margin: auto;
+  }
 }
 
 .match-list {
@@ -114,9 +138,18 @@ $scoreboard-1388-height: 65px;
   }
   .barchart {
     grid-area: 1 / 2 / span 1 / span 1;
-    .barchart-container {
-      margin: auto;
-      width: 600px;
+    display: flex;
+    justify-content: center;
+    .barchart-label {
+      display: grid;
+      grid-template-columns: 18px;
+      grid-template-rows: 66px repeat(10, 22px);
+      @for $i from 1 through 10 {
+        .champion-label-#{$i} {
+          grid-row-start: $i+1;
+          grid-row-end: span 1;
+        }
+      }
     }
   }
   @include matchGraphs;
@@ -233,8 +266,6 @@ $sb-cs-width: 70px;
   grid-column: 1;
 }
 
-.summoner-general,
-.match-list,
 .scoreboard-title-blue,
 .scoreboard-title-red{
   background-color: purple;

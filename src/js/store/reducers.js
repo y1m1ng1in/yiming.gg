@@ -9,7 +9,7 @@ export const indexOfMatchListSelected = (state=0, action) => {
 
 let constantKeys = [ 
   "id", "accountId", "puuid", "name", "profileIconId", 
-  "revisionDate", "summonerLevel", "server"
+  "revisionDate", "summonerLevel", "server", "summonerDetails"
 ];
 
 export let constantKeyReducers = {};

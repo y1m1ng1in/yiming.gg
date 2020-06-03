@@ -23,11 +23,27 @@ export const SummonerSearch = connect(
 )(Form)
 
 export const SummonerGeneralInfo = connect(
-  state => ({
-    name: state.name,
-    level: state.summonerLevel,
-    icon: state.profileIconId 
-  }),
+  state => {
+    let rankInfo = {};
+    state.summonerDetails.forEach(queuetype => {
+      if(queuetype.queueType == "RANKED_SOLO_5x5") {
+        const { tier, rank, wins, losses, leaguePoints } = queuetype;
+        rankInfo = {
+          tier: tier,
+          rank: rank,
+          wins: wins,
+          losses: losses,
+          leaguePoints: leaguePoints
+        }
+      }
+    });
+    return {
+      rankInfo: rankInfo,
+      name: state.name,
+      level: state.summonerLevel,
+      icon: state.profileIconId 
+    };
+  },
   null
 )(SummonerGeneral)
 

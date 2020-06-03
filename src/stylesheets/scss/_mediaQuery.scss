@@ -17,8 +17,33 @@
     grid-template-rows: 54px repeat(4, 75px) repeat(5, 85px);
   }
 
+  .summoner-general {
+    grid-template-columns: 120px 1fr;
+    .rank-logo {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
   .match-graphs {
     grid-area: 1 / 1 / span 4 / span 1;
+    .barchart {
+      grid-area: 1 / 1 / span 1 / span 1;
+    }
+    grid-template-columns: 1fr;
+    position: relative;
+    .graph-control-panel {
+      position: absolute;
+      left: 0px;
+      width: 200px;
+      .graph-control-panel-togglable {   
+        height: 35px;    
+        display: grid;
+      }
+      .graph-control-panel-fixed {
+        display: none;
+      }
+    }
   }
  
   .scoreboard-title {
@@ -82,6 +107,18 @@
     grid-template-rows: 54px repeat(14, 75px);
   }
 
+  .summoner-general {
+    grid-template-columns: 70px 1fr;
+    .name-level {
+      #summoner-name {
+        font-size: 1.1rem;
+      }
+      #tier-rank {
+        font-size: 0.9rem;
+      }
+    }
+  } 
+
   .summoner-overall {
     grid-area: 2 / 1 / span 14 / span 4;
     grid-template-rows: repeat(14, 1fr);
@@ -107,6 +144,9 @@
       .graph-control-panel-fixed {
         display: none;
       }
+    }
+    .barchart {
+      grid-area: 1 / 1 / span 1 / span 1;
     }
   }
 

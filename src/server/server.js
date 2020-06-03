@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import App from '../js/App';
 import storeFactory from "../js/store/";
-import { base, matchList, matchData } from "./api";
+import { base, matchList, matchData, summonerDetail } from "./api";
 
 let express    = require('express');
 let path       = require('path');
@@ -157,6 +157,15 @@ app.post('/search', function(req, res) {
         },
         ...value   
       };
+      return rp({
+        uri: summonerDetail(state.id, state.server), 
+        headers: { 'X-Riot-Token': apiKey },
+        json: true
+      });
+    })
+    .then(value => {
+      state = { ...state, ...value }
+      initStore = { summonerDetails: value, ...initStore }
       return rp({
         uri: matchList(state.accountId, state.server), 
         headers: { 'X-Riot-Token': apiKey },
