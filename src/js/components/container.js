@@ -10,6 +10,7 @@ import {
   getSummonerInfo, getMatchDetail, getMoreMatchStats, changeGraphDisplay 
 } from "../../actions";
 import MatchGraphs from './MatchGraphs';
+import BarChart from './BarChart';
 
 export const SummonerSearch = connect(
   null, 
@@ -133,3 +134,12 @@ export const MatchGraphController = connect(
     }
   })
 )(GraphController)
+
+export const BarChartContainer = connect(
+  (state, ownProps) => ({ 
+    type: state.graphDisplay.mode,
+    teamRed: ownProps.teamRed,
+    teamBlue: ownProps.teamBlue 
+  }),
+  null
+)(BarChart)

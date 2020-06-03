@@ -15,9 +15,6 @@ $scoreboard-1388-height: 65px;
   grid-template-rows: $component-height + $label-height + 2px repeat(9, 75px);
   column-gap: 2px;
   row-gap: 10px;
-  // height: 100vh;
-  // width: 100vw;
-  // overflow: hidden;
   overflow-x: hidden;
 }
 
@@ -89,7 +86,7 @@ $scoreboard-1388-height: 65px;
 .match-graphs {
   grid-area: 1 / 1 / span 5 / span 1;
   display: grid;
-  grid-template-columns: 200px repeat(2, 400px);
+  grid-template-columns: 200px 1fr;
   .graph-control-panel {
     grid-area: 1 / 1 / span 1 / span 1;
     .graph-control-panel-fixed,
@@ -117,9 +114,10 @@ $scoreboard-1388-height: 65px;
   }
   .barchart {
     grid-area: 1 / 2 / span 1 / span 1;
-  }
-  .pie-chart {
-    grid-area: 1 / 3 / span 1 / span 1
+    .barchart-container {
+      margin: auto;
+      width: 600px;
+    }
   }
   @include matchGraphs;
 }
@@ -227,12 +225,6 @@ $sb-cs-width: 70px;
       grid-row-end: span 1;
     }
   }
-  // .bg-team-100 {
-  //   background-color: #F1FAFF;
-  // }
-  // .bg-team-200 {
-  //   background-color: #FFF1F1;
-  // }
 }
 
 @include scoreboard-grid-area;

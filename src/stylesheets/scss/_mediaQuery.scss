@@ -19,28 +19,6 @@
 
   .match-graphs {
     grid-area: 1 / 1 / span 4 / span 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    position: relative;
-    .graph-control-panel {
-      position: absolute;
-      left: 0px;
-      width: 200px;
-      // height: 100%;
-      .graph-control-panel-togglable {   
-        height: 35px;    
-        display: grid;
-      }
-      .graph-control-panel-fixed {
-        display: none;
-      }
-    }
-    .barchart {
-      grid-area: 1 / 1 / span 1 / span 1;
-    }
-    .pie-chart {
-      grid-area: 1 / 2 / span 1 / span 1
-    }
   }
  
   .scoreboard-title {
@@ -101,33 +79,39 @@
 
 @media (max-width: 1023px) and (min-width: 768px) {
   .app {
-    grid-template-rows: 54px repeat(18, 75px);
+    grid-template-rows: 54px repeat(14, 75px);
   }
 
   .summoner-overall {
-    grid-area: 2 / 1 / span 18 / span 4;
-    grid-template-rows: repeat(19, 1fr);
+    grid-area: 2 / 1 / span 14 / span 4;
+    grid-template-rows: repeat(14, 1fr);
   }
 
   .match-detail {
-    grid-area: 1 / 2 / span 18 / span 3;
-    grid-template-rows: repeat(19, 1fr);
+    grid-area: 1 / 2 / span 14 / span 3;
+    grid-template-rows: repeat(14, 1fr);
   }
 
   .match-graphs {
-    grid-area: 1 / 1 / span 9 / span 1;
-    grid-template-columns: 200px repeat(1, 400px);
-    grid-template-rows: repeat(2, 1fr);
+    grid-area: 1 / 1 / span 4 / span 1;
+    grid-template-columns: 1fr;
+    position: relative;
     .graph-control-panel {
-      grid-area: 1 / 1 / span 2 / span 1;
-    }
-    .pie-chart {
-      grid-area: 2 / 2 / span 1 / span 1;
+      position: absolute;
+      left: 0px;
+      width: 200px;
+      .graph-control-panel-togglable {   
+        height: 35px;    
+        display: grid;
+      }
+      .graph-control-panel-fixed {
+        display: none;
+      }
     }
   }
 
   .scoreboard {
-    grid-area: 10 / 1 / span 10 / span 1;
+    grid-area: 5 / 1 / span 9 / span 1;
     grid-template-columns: 1fr;
     grid-template-rows: 45px repeat(5, 65px) 45px repeat(5, 65px);
   }
@@ -191,11 +175,11 @@
     display: none;
   }
   .app {
-    grid-template-rows: 54px repeat(18, 75px);
+    grid-template-rows: 54px repeat(15, 75px);
   }
   .summoner-overall {
-    grid-area: 2 / 1 / span 18 / span 4;
-    grid-template-rows: repeat(19, 1fr);
+    grid-area: 2 / 1 / span 14 / span 4;
+    grid-template-rows: repeat(14, 1fr);
   }
   .summoner-general {
     grid-area: 1 / 1 / span 2 / span 4;
@@ -210,12 +194,12 @@
     margin-right: auto;
   }
   .match-detail {
-    grid-area: 1 / 1 / span 18 / span 4;
-    grid-template-rows: repeat(19, 1fr);
+    grid-area: 1 / 1 / span 14 / span 4;
+    grid-template-rows: repeat(14, 1fr);
   }
   .match-graphs {
     grid-template-columns: 1fr;
-    grid-area: 1 / 1 / span 9 / span 1;
+    grid-area: 1 / 1 / span 4 / span 1;
     position: relative;
     .graph-control-panel {
       position: absolute;
@@ -232,12 +216,9 @@
     .barchart {
       grid-area: 1 / 1 / span 1 / span 1;
     }
-    .pie-chart {
-      grid-area: 2 / 1 / span 1 / span 1
-    }
   }
   .scoreboard {
-    grid-area: 10 / 1 / span 10 / span 1;
+    grid-area: 5 / 1 / span 10 / span 1;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(12, 1fr);
   }

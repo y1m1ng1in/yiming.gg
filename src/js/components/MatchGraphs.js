@@ -1,7 +1,5 @@
 import React from "react";
-import BarChart from "./BarChart";
-import PieChart from "./PieChart";
-import { MatchGraphController } from "./container";
+import { MatchGraphController, BarChartContainer } from "./container";
 
 const MatchGraphs = ({ display, data }) => {
   const getValues = teamPlayers => {
@@ -43,8 +41,7 @@ const MatchGraphs = ({ display, data }) => {
   return (
     <div className="match-graphs">
       <MatchGraphController />
-      <BarChart teamRed={teamReadData} teamBlue={teamBlueData} />
-      <PieChart teamRed={teamReadData} teamBlue={teamBlueData} />
+      <BarChartContainer teamRed={teamReadData} teamBlue={teamBlueData} />
     </div>
   )
 }

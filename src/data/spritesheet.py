@@ -73,13 +73,15 @@ def gen_perk_image_list(rune):
 
 def gen_spritesheet(col, directory, image_list, write_to, css_filename, 
                     class_prefix, spritesheet_filepath, image_size, 
-                    size_percentage=1, responsive_768=1):
+                    size_percentage=1, responsive_768=1, write_spritesheet_map=False):
   css_rules = []
   css_responsive_768_rules = []
+  champion_id_map = []
 
   col_index, row_index = 0, 0
   image_row, image_col = [], []
   first_image_channel = 0
+  champion_id_map_row = []
   for key, image in image_list:
     img = cv2.imread(directory + image, cv2.IMREAD_UNCHANGED)
     if first_image_channel == 0:
@@ -87,7 +89,7 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename,
     if img.shape[0] != image_size[0] or img.shape[1] != image_size[1]:
       img = cv2.resize(img, image_size)
     image_col.append(img)
-
+    champion_id_map_row.append(key)
     css_rules.append(
       gen_css_rule(
         class_prefix + str(key),
@@ -116,7 +118,10 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename,
       image_col = []
       col_index = 0
       row_index += 1
+      champion_id_map.append(champion_id_map_row)
+      champion_id_map_row = []
   image_row.append(image_col)
+  champion_id_map.append(champion_id_map_row)
  
   width, last_row_width = 0, 0
   last_row_height = 0
@@ -144,6 +149,11 @@ def gen_spritesheet(col, directory, image_list, write_to, css_filename,
 
   spritesheet = cv2.vconcat([cv2.hconcat(col) for col in image_row])
   cv2.imwrite(write_to, spritesheet)
+
+  if write_spritesheet_map:
+    with open("spritesheet_champion_id_mapping.json", 'w') as f:
+      json.dump(champion_id_map, f)
+    f.close()
 
 
 def main():
@@ -249,7 +259,7 @@ def main():
     gen_spritesheet(
       10, '../../resources/champion/', champion_image_list, 'champion_spritesheet.png', 
       champion_css, champion_css_prefix, '../data/champion_spritesheet.png', 
-      (120, 120), size_percentage=percentage, responsive_768=responsive_768)
+      (120, 120), size_percentage=percentage, responsive_768=responsive_768, write_spritesheet_map=True)
 
   if not exclude_item:
     gen_spritesheet(

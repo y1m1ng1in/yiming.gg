@@ -40,10 +40,8 @@ const DashLine = ({ transformX, transformY, height, text }) => {
 
 const BarChart = ({ teamRed, teamBlue, type }) => {
   const margin = { top: 50, right: 0, bottom: 30, left: 40 };
-  const width  = 400;
+  const width  = 600;
   const height = 300;
-  // let data = [[4000, 1], [2000, 2], [1000, 3], [5000, 4], [14243, 5]]; // simulate damage
-  // let data2 = [[3424, 1], [12311, 2], [431, 3], [9883, 4], [5631, 5]];
   let data = teamBlue;
   let data2 = teamRed;
   const yDomain = [1, 2, 3, 4, 5];
@@ -54,7 +52,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
 
   let y = d3.scaleBand()
       .domain(yDomain)
-      .rangeRound([margin.top * 1.5, (height - margin.bottom) / 2])
+      .rangeRound([margin.top + 10, (height - margin.bottom) / 2 + 10])
       .padding(0.1);
 
   let ticks = d3.ticks(0, d3.max([...data, ...data2], d => d[0]), 5);
@@ -63,28 +61,40 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
       .domain(yDomain)
       .rangeRound([
         (height - margin.bottom) / 2 + 20, 
-        (height - margin.bottom) / 2 + 20 + (height - margin.bottom) / 2 - margin.top * 1.5
+        (height - margin.bottom) / 2 - 20 + (height - margin.bottom) / 2 
       ])
       .padding(0.1);
 
+  let yTeam = d3.scaleBand()
+        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        .range([margin.top, height - margin.bottom])
+        .padding(0.15);
+      
   let yComparsion = d3.scaleBand()
         .domain(yDomain)
         .range([margin.top, height - margin.bottom])
-        .padding(0.2);
+        .padding(0.15);
 
-  const printTeamBar = (data, yScale, color) => 
-      data.map((d, i) => 
-        <Bar 
-          key={i} 
-          width={x(d[0]) - margin.left} 
-          height={yScale.bandwidth()} 
-          transformX={margin.left} 
-          transformY={yScale(d[1])}
-          color={color}
-          text={d[0]}/>)
 
+  const extract = (d, k) => d.map(i => i[k]);
+
+  const printTeamBar = (data1, data2, yScale, color1, color2) => {
+    let data = [...extract(data1, 0), ...extract(data2, 0)];
+    let index = [1, 2, 3, 4, 5, 6 ,7 ,8, 9, 10]
+    data = d3.zip(data, index);
+    console.log(data)
+    return data.map((d, i) =>
+      <Bar
+        key={i}
+        transformX={margin.left}
+        transformY={yScale(d[1])} 
+        width={x(d[0]) - margin.left} 
+        height={yScale.bandwidth()}
+        text={d[0]}
+        color={i < 5 ? color1 : color2} />)
+  }
+      
   const printComparsionBar = (data1, data2, yScale, color1, color2) => {
-    let extract = (d, k) => d.map(i => i[k]);
     let data = d3.zip(extract(data1, 0), extract(data2, 0), yDomain, yDomain);
     return data.map((d, i) =>
       <BarComparsion 
@@ -97,29 +107,32 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
         text={[d[0], d[1]]}/>)
   }
 
+
   return (
     <div className="barchart">
-      <svg height="300" width="400">
-        <text fill="currentColor" x={margin.left} y={margin.top} fontSize="14">
-          Damage Dealt to Champions
-        </text>
-        <g transform="translate(0, 15)">
-          {
-            ticks.map((d, i) => 
-            <DashLine 
-                  key={i} 
-                  transformX={x(d)} 
-                  transformY={margin.top} 
-                  height={height - margin.top - margin.bottom}
-                  text={d} />)
-          }
-          {/* { printTeamBar(data, y, "#468BFF") }
-          { printTeamBar(data2, y2, "#FF757B") } */}
-          {
-            printComparsionBar(data, data2, yComparsion, "#468BFF", "#FF757B")
-          }
-        </g>
-      </svg>
+      <div className="barchart-container">
+        <svg height="300" width="600">
+          <text fill="currentColor" x={margin.left} y={margin.top} fontSize="14">
+            Damage Dealt to Champions
+          </text>
+          <g transform="translate(0, 15)">
+            {
+              ticks.map((d, i) => 
+              <DashLine 
+                    key={i} 
+                    transformX={x(d)} 
+                    transformY={margin.top} 
+                    height={height - margin.top - margin.bottom}
+                    text={d} />)
+            }
+            {
+              type === "individual" 
+                ? printComparsionBar(data, data2, yComparsion, "#468BFF", "#FF757B")
+                : printTeamBar(data, data2, yTeam, "#468BFF", "#FF757B")
+            }
+          </g>
+        </svg>
+      </div>
     </div>
   )
 }
