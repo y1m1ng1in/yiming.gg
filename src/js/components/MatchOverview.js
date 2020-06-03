@@ -20,7 +20,7 @@ const printDate = timestamp => {
   }
 }
 
-const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=f=>f }) => {
+const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, currentSelected, onSelect=f=>f }) => {
   useEffect(() => {
     let mql = window.matchMedia('(min-width: 768px)');
     mql.addEventListener("change", e => {
@@ -55,7 +55,7 @@ const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=
   }
 
   return (
-    <li className="match-list-item" onClick={select}>
+    <li className={`match-list-item ${index === currentSelected ? "selected-match-list-item" : ""}`} onClick={select}>
       <div className={`champion-60-${champion} sprite`}></div>
       <div className="match-list-item-meta">
         {

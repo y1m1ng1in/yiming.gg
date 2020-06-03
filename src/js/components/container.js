@@ -93,7 +93,8 @@ export const MatchListItem = connect(
       matchInfo: { timestamp: timestamp, queue: queue, win: win },
       kda: { kills: kills, deaths: deaths, assists: assists },
       index: index,
-      outstanding: outstanding
+      outstanding: outstanding,
+      currentSelected: state.indexOfMatchListSelected
     };
   },
   dispatch => ({
@@ -155,6 +156,7 @@ export const MatchGraphController = connect(
 export const BarChartContainer = connect(
   (state, ownProps) => ({ 
     type: state.graphDisplay.mode,
+    view: state.graphDisplay.view,
     teamRed: ownProps.teamRed,
     teamBlue: ownProps.teamBlue 
   }),

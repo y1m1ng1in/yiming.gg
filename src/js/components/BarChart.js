@@ -39,7 +39,7 @@ const DashLine = ({ transformX, transformY, height, text }) => {
   )
 }
 
-const BarChart = ({ teamRed, teamBlue, type }) => {
+const BarChart = ({ teamRed, teamBlue, type, view }) => {
   const margin = { top: 50, right: 30, bottom: 30, left: 5 };
   const width  = 600;
   const height = 300;
@@ -127,6 +127,15 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
     }
   }
 
+  const getTitle = () => {
+    if(view === "damage") {
+      return "Damage Dealt to Champions";
+    } else if(view === "gold") {
+      return "Gold Coin Earned";
+    } else {
+      return "Vision Score";
+    }
+  }
 
   return (
     <div className="barchart">
@@ -136,7 +145,7 @@ const BarChart = ({ teamRed, teamBlue, type }) => {
       <div className="barchart-container">
         <svg height="300" width="600">
           <text fill="currentColor" x={margin.left} y={margin.top} fontSize="14">
-            Damage Dealt to Champions
+            {getTitle()}
           </text>
           <g transform="translate(0, 15)">
             {

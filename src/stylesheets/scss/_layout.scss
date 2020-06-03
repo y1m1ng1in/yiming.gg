@@ -95,6 +95,14 @@ $scoreboard-1388-height: 65px;
     overflow-x: hidden;
     overflow-y: scroll;
     margin: 0;
+    .selected-match-list-item {
+      background-color: #e6ffff;
+    }
+    .match-list-item:hover {
+      font-weight: bold;
+      background-color: #e6ffff;
+      cursor: pointer;
+    }
   }
   .show-more {
     height: 5%;
