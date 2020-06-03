@@ -110,4 +110,15 @@ $triple-bg-color: #F6BFB4;
       }
     }
   }
+  .show-more {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .show-more:hover {
+    background-color: $button-hover-bg-color;
+    font-weight: bold;
+    cursor: pointer;
+  }
 }

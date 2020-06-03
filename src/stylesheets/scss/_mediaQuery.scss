@@ -39,6 +39,11 @@
       .graph-control-panel-togglable {   
         height: 35px;    
         display: grid;
+        .first-line-toggle {
+          .back {
+            display: none;
+          }
+        }
       }
       .graph-control-panel-fixed {
         display: none;
@@ -111,11 +116,16 @@
     grid-template-columns: 70px 1fr;
     .name-level {
       #summoner-name {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
       }
       #tier-rank {
         font-size: 0.9rem;
       }
+    }
+    .rank-24-UNRANKED {
+      background-size: 76px 87px;
+      width: 76px;
+      height: 87px;
     }
   } 
 
@@ -140,6 +150,11 @@
       .graph-control-panel-togglable {   
         height: 35px;    
         display: grid;
+        .first-line-toggle {
+          .back {
+            display: none;
+          }
+        }
       }
       .graph-control-panel-fixed {
         display: none;

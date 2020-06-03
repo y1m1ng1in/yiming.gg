@@ -40,7 +40,7 @@ const MatchList = ({ indexRange, matchMetas, onShowMore=f=>f }) => {
       {
         matchMetas.hasMore ?
           <div className="show-more" onClick={getMoreMatches}>
-            Show More...
+            Show More
           </div> : ""
       }   
     </div>  

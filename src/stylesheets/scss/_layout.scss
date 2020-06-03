@@ -78,6 +78,12 @@ $scoreboard-1388-height: 65px;
   .rank-logo {
     margin: auto;
   }
+  .rank-24-UNRANKED {
+    background: url('../data/Emblem_Unranked.png');
+    background-size: 140px 140px;
+    width: 140px;
+    height: 140px;
+  }
 }
 
 .match-list {
