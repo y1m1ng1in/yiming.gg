@@ -69,6 +69,15 @@ def process_perk():
   f.close()
   return mapping
 
+def process_queue():
+  mapping = {}
+  with open('./queues.json', encoding="utf8") as f:
+    data = json.load(f)
+    for queue in data:
+      mapping[int(queue['queueId'])] = queue['map']
+  f.close()
+  return mapping
+
 
 def write_json(fname, json_obj):
   with open(fname, 'w') as f:
@@ -81,12 +90,13 @@ def main():
   item     = process_item()
   summoner = process_summoner()
   perk     = process_perk()
+  queues   = process_queue()
 
   write_json("championLookup.json", champion)
   write_json("itemLookup.json", item)
   write_json("summonerLookup.json", summoner)
   write_json("perkLookup.json", perk)
-
+  write_json("queueLookup.json", queues)
 
 if __name__ == '__main__':
   main()

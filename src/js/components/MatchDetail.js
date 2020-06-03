@@ -2,9 +2,8 @@ import React from "react";
 import Scoreboard from './Scoreboard';
 import { MatchGraphContainer } from './container';
 import '../../stylesheets/style.css';
-import BarChart from "./BarChart";
 
-const MatchDetail = ({ matchData }) => {
+const MatchDetail = ({ matchData, summonerName }) => {
   const scoreboardData = matchData => {
     const key = [
       'championId', 'champLevel', 'kills', 'deaths', 'assists', 'spell1Id', 
@@ -14,16 +13,18 @@ const MatchDetail = ({ matchData }) => {
     const itemKey = [
       'item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6'
     ];
-    const playerObj = sourceObj => {
+    const playerObj = (sourceObj, summonerName=undefined) => {
       let obj = {};
       key.forEach(k => obj[k] = sourceObj[k]);
       obj['items'] = itemKey.map(i => sourceObj[i]);
-      obj['name']  = sourceObj['summonerName'];
+      summonerName === undefined 
+        ? obj['name'] = sourceObj['summonerName']
+        : obj['name'] = summonerName;
       obj['cs']    = obj['neutralMinionsKilled'] + obj['totalMinionsKilled'];
       return obj;
     }
 
-    let summoner            = playerObj(matchData.summonerStat);
+    let summoner            = playerObj(matchData.summonerStat, summonerName);
     let summonerTeamId      = summoner['teamId'];
     let summonerTeamPlayers = [ summoner ];
     let otherTeamPlayers    = [];

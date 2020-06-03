@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import '../../stylesheets/style.css';
 import '../../stylesheets/champion_spritesheet_60.css';
+import queueLookup from '../../data/queueLookup.json';
 
 const printDate = timestamp => {
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -63,7 +64,7 @@ const MatchOverview = ({ champion, kda, matchInfo, index, outstanding, onSelect=
           : <div className="lose">Defeat</div>
         }
         <div className="meta-info">
-          queueId: {matchInfo.queue} <br />
+          {queueLookup[matchInfo.queue]} <br />
           {printDate(matchInfo.timestamp)}
         </div>
       </div>

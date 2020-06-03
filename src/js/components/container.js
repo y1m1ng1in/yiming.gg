@@ -129,7 +129,8 @@ export const SummonerData = connect(
 
 export const MatchDetailContainer = connect(
   state => ({
-     matchData: state.matchStats[state.indexOfMatchListSelected] 
+     matchData: state.matchStats[state.indexOfMatchListSelected],
+     summonerName: state.name
   }),
   null
 )(MatchDetail)
