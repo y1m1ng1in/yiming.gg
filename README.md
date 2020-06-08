@@ -16,8 +16,7 @@ In order to build the app locally, you need to apply for an api key at [Riot off
     cd yiming.gg/ 
 
     // change your api key
-    cd src/
-    vim config.json
+    vim ./src/config.json
     // then replace the "replace-me" with your Riot api key
     
     // install dependencies
