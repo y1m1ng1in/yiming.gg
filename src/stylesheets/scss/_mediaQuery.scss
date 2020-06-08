@@ -25,6 +25,10 @@
     }
   }
 
+  .landing-container {
+    grid-row-end: span 8;
+  }
+
   .match-graphs {
     grid-area: 1 / 1 / span 4 / span 1;
     .barchart {
@@ -232,8 +236,16 @@
   .app {
     grid-template-rows: 54px repeat(15, 75px);
   }
+  .header {
+    .logo {
+      left: 20px;
+    }
+    .search-form {
+      grid-template-columns: 50px 1fr 60px;
+    }
+  }
   .summoner-overall {
-    grid-area: 2 / 1 / span 14 / span 4;
+    grid-area: 2 / 1 / span 15 / span 4;
     grid-template-rows: repeat(14, 1fr);
   }
   .summoner-general {
@@ -250,7 +262,7 @@
   }
   .match-detail {
     grid-area: 1 / 1 / span 14 / span 4;
-    grid-template-rows: repeat(14, 1fr);
+    grid-template-rows: repeat(14, 1fr) 1px;
   }
   .match-graphs {
     grid-template-columns: 1fr;

@@ -12,7 +12,7 @@ $scoreboard-1388-height: 65px;
 .app {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: $component-height + $label-height + 2px repeat(9, 75px);
+  grid-template-rows: $component-height + $label-height + 2px repeat(9, 75px) 1px;
   column-gap: 2px;
   row-gap: 10px;
   overflow-x: hidden;
@@ -22,11 +22,13 @@ $scoreboard-1388-height: 65px;
   grid-area: 1 / 1 / span 1 / span 4;
 }
 
-.search-form {
-  position: absolute;
-  right: 1px;
+@mixin serach-form-style($position, $grid-template-columns, $in-header) {
+  position: $position;
+  @if $in-header {
+    right: 1px;
+  }
   display: grid;
-  grid-template-columns: 50px 1fr 80px;
+  grid-template-columns: $grid-template-columns;
   grid-template-rows: 12px 1fr;
   fieldset {
     grid-area: 1 / 1 / span 2 / span 1;
@@ -40,6 +42,38 @@ $scoreboard-1388-height: 65px;
   label[for="player-name"] {
     grid-area: 1 / 2 / span 1 / span 1;
   }
+}
+
+.header {
+  .search-form {
+    @include serach-form-style(absolute, 50px 1fr 80px, true);
+    @include search-from;
+  }
+}
+
+.landing-container {
+  grid-row-start: 2;
+  grid-column-end: span 4;
+  grid-row-end: span 9;
+
+  $landing-width: 50px + 400px + 80px;
+  .landing-logo {
+    font-size: 3rem;
+    font-weight: bold;
+    width: $landing-width;
+    height: 350px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: auto;
+  }
+  .search-form {
+    width: $landing-width;
+    margin: auto;
+    @include serach-form-style(relative, 50px 400px 80px, false);
+    @include search-from;
+  }
+  @include white-background-with-shadow;
 }
 
 .summoner-overall {
@@ -107,7 +141,7 @@ $scoreboard-1388-height: 65px;
 
 .match-list {
   grid-area: 3 / 1 / span 8 / span 1;
-  margin: 0;
+  margin-bottom: 10px;
   overflow: hidden;
   ul {
     height: 90%;
@@ -136,7 +170,7 @@ $scoreboard-1388-height: 65px;
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr) 1px;
   row-gap: 10px;
 }
 

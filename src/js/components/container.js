@@ -11,6 +11,7 @@ import {
 } from "../../actions";
 import MatchGraphs from './MatchGraphs';
 import BarChart from './BarChart';
+import Header from './Header';
 
 export const SummonerSearch = connect(
   null, 
@@ -21,6 +22,11 @@ export const SummonerSearch = connect(
     }
   })
 )(Form)
+
+export const HeaderContainer = connect(
+  state => ({ hasSummonerSearch: state.hasSearchedSummoner }),
+  null
+)(Header)
 
 export const SummonerGeneralInfo = connect(
   state => {

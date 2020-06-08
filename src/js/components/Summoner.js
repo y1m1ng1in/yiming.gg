@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  SummonerGeneralInfo, MatchListContainer, MatchDetailContainer
+  SummonerGeneralInfo, MatchListContainer, 
+  MatchDetailContainer, SummonerSearch
 } from "./container";
 import '../../stylesheets/style.css';
 
@@ -22,9 +23,14 @@ const Summoner = ({ hasSearchedSummoner, hasError, errorMessage }) => {
           {errorMessage.statusMessage}          
         </div>
       </div>
-    )
+    );
   } else {
-    return "";
+    return (
+      <div className="landing-container">
+        <div className="landing-logo">Yiming.GG</div>
+        <SummonerSearch />
+      </div>
+    );
   }
 }
 

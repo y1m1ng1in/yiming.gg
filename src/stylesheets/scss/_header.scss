@@ -11,35 +11,36 @@ $select-width: 50px;
     position: absolute;
     left: 100px;
   }
-  .search-form {
+  @include white-background-with-shadow;
+}
+
+@mixin search-from {
+  border: none;
+  fieldset {
     border: none;
-    fieldset {
-      border: none;
-      margin: 0;
-      padding: 0;
-      legend {
-        font-size: 0.6rem;
-      }
-      select {
-        height: $component-height;
-        width: $select-width;
-        font-family: inherit;
-      }
-    }
-    input {
-      height: $component-height;
-      box-sizing: border-box;
-      font-family: inherit;
-    }
-    button {
-      height: $component-height;
-      background-color: white;
-      font-family: inherit;
-    }
-    label[for="player-name"] {
+    margin: 0;
+    padding: 0;
+    legend {
       font-size: 0.6rem;
-      height: $label-height;
+    }
+    select {
+      height: $component-height;
+      width: $select-width;
+      font-family: inherit;
     }
   }
-  @include white-background-with-shadow;
+  input {
+    height: $component-height;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  button {
+    height: $component-height;
+    background-color: white;
+    font-family: inherit;
+  }
+  label[for="player-name"] {
+    font-size: 0.6rem;
+    height: $label-height;
+  }
 }

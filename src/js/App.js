@@ -1,12 +1,11 @@
 import React from "react";
-import { SummonerData } from "./components/container";
-import Header from "./components/Header";
+import { SummonerData, HeaderContainer } from "./components/container";
 import '../stylesheets/style.css';
 
 const App = () => {
   return (
     <div className="app">
-      <Header />
+      <HeaderContainer />
       <SummonerData />
     </div>
   );
