@@ -1,12 +1,12 @@
 # Yiming GG
-A web application analyzes League of Legends summoners and match statistics.
+A web application analyzes League of Legends summoners and match statistics. <br/>
 Yiming GG is available under the [MIT License](./LICENSE).
 
 ## Contributor Info.
 Yiming Lin [yl6@pdx.edu](yl6@pdx.edu)
 
 ## Url
-Visite our live site: [Yiming.GG](https://yiming-gg-testing-278304.ue.r.appspot.com/)
+Visite our live site: [Yiming.GG](https://yiming-gg-testing-278304.ue.r.appspot.com/)<br/>
 Live site url: https://yiming-gg-testing-278304.ue.r.appspot.com
 
 ## Build Instruction
@@ -15,10 +15,10 @@ In order to build the app locally, you need to apply for an api key at [Riot off
     // go to the top-level directory
     cd yiming.gg/ 
 
-	  // change your api key
-	  cd src/
-	  vim config.json
-	  // then replace the "replace-me" with your Riot api key
+    // change your api key
+    cd src/
+    vim config.json
+    // then replace the "replace-me" with your Riot api key
     
     // install dependencies
     npm install
@@ -26,11 +26,10 @@ In order to build the app locally, you need to apply for an api key at [Riot off
     // webpack build
     npx webpack
 
-	  // transpile JSX code and run server
-	  npx babel-node ./src/server/server.js
+    // transpile JSX code and run server
+    npx babel-node ./src/server/server.js
 	
-	  // now visit site at localhost:3000
-
+    // now visit site at localhost:3000
 
 ## App usage
 1. Firstly, visit our site [Yiming.GG](https://yiming-gg-testing-278304.ue.r.appspot.com/)
