@@ -244,6 +244,16 @@
       grid-template-columns: 50px 1fr 60px;
     }
   }
+  .landing-container {
+    $landing-width: 330px;
+    .search-form {
+      width: $landing-width;
+      grid-template-columns: 50px 200px 80px;
+    }
+    .landing-logo {
+      width: $landing-width;
+    }
+  }
   .summoner-overall {
     grid-area: 2 / 1 / span 15 / span 4;
     grid-template-rows: repeat(14, 1fr);
@@ -268,6 +278,8 @@
     grid-template-columns: 1fr;
     grid-area: 1 / 1 / span 4 / span 1;
     position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
     .graph-control-panel {
       position: absolute;
       left: 0px;
@@ -288,6 +300,8 @@
     grid-area: 5 / 1 / span 10 / span 1;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(12, 1fr);
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
   @for $i from 1 through 5 {
     .summoner-team-#{$i} {

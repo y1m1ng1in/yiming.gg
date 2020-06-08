@@ -10,6 +10,17 @@ $select-width: 50px;
     top: 8px;
     position: absolute;
     left: 100px;
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      font-weight: 500;
+    }
+    a:visited {
+      text-decoration: none;
+      color: black;
+    }
   }
   @include white-background-with-shadow;
 }
