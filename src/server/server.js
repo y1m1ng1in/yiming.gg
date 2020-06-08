@@ -23,6 +23,7 @@ const staticCss = fs.readFileSync(path.join(__dirname, '../../dist/styles.css'))
 
 const emptyStore = storeFactory({ 
   hasSearchedSummoner: false,
+  hasError: false,
   indexOfMatchListSelected: 0
 });
 
@@ -150,6 +151,8 @@ app.post('/search', function(req, res) {
       state = { ...value, server: server }
       initStore = { 
         hasSearchedSummoner: true, 
+        hasError: false,
+        errorMessage: {},
         server: server,
         graphDisplay: {
           view: 'damage',
@@ -209,7 +212,16 @@ app.post('/search', function(req, res) {
       res.send(basePage(html(initStore), initStore.getState()));
     })
     .catch(err => {
-      console.log(err);
+      initStore = {
+        hasSearchedSummoner: false,
+        hasError: true,
+        errorMessage: {
+          statusCode: err.statusCode,
+          statusMessage: err.error.status.message
+        }
+      };
+      initStore = storeFactory(initStore);
+      res.send(basePage(html(initStore), initStore.getState()));
     });
 });
 
@@ -248,6 +260,6 @@ app.post('/more', function(req, res) {
 global.React = React;
 
 app.listen(
-  3000, 
+  process.env.PORT || 3000, 
   () => {console.log("server running at port 3000");}
 );

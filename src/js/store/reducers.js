@@ -8,14 +8,19 @@ export const indexOfMatchListSelected = (state=0, action) => {
 }
 
 let constantKeys = [ 
-  "id", "accountId", "puuid", "name", "profileIconId", 
-  "revisionDate", "summonerLevel", "server", "summonerDetails"
+  "id", "accountId", "puuid", "name", "profileIconId",
+  "revisionDate", "summonerLevel", "server", "summonerDetails", 
+  "errorMessage"
 ];
 
 export let constantKeyReducers = {};
 constantKeys.forEach(key => constantKeyReducers[key] = (state={}) => state);
 
 export const hasSearchedSummoner = (state=false, action) => {
+  return state;
+}
+
+export const hasError = (state=false, action) => {
   return state;
 }
 

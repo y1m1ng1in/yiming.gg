@@ -1,7 +1,7 @@
 import React from "react";
 import '../../stylesheets/style.css';
 
-const Form = ({onSubmit=f=>f}) => {
+const Form = ({ onSubmit=f=>f }) => {
   const submit = e => {
     let summoner = document.getElementById("player-name").value;
     let server   = document.getElementById("server");
@@ -17,7 +17,7 @@ const Form = ({onSubmit=f=>f}) => {
       <fieldset>
         <legend>Server</legend>
         <select id="server" name="server" aria-label="server">
-          <option label="na" value="na" id="na"></option>
+          <option label="na" value="na1" id="na"></option>
           <option label="kr" value="kr" id="kr"></option>
         </select>
       </fieldset>

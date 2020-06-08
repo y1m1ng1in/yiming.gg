@@ -124,7 +124,11 @@ export const MatchListContainer = connect(
 )(MatchList)
 
 export const SummonerData = connect(
-  state => ({ hasSearchedSummoner: state.hasSearchedSummoner }),
+  state => ({ 
+    hasSearchedSummoner: state.hasSearchedSummoner, 
+    hasError: state.hasError,
+    errorMessage: state.errorMessage 
+  }),
   null
 )(Summoner)
 

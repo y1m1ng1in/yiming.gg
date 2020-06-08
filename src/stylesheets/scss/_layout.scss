@@ -52,6 +52,25 @@ $scoreboard-1388-height: 65px;
   grid-template-rows: repeat(10, 1fr);
 }
 
+.error-message-container {
+  grid-row-start: 2;
+  grid-column-end: span 4;
+  grid-row-end: span 6;
+  .error-image {
+    background: url('../data/errorpage-img.png');
+    background-size: 600px 384px;
+    width: 600px;
+    height: 384px;
+    margin: auto;
+  }
+  .error-message {
+    width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+  @include white-background-with-shadow;
+}
+
 .summoner-general {
   grid-area: 1 / 1 / span 2 / span 1;
   display: grid;
